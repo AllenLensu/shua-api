@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.poindre.shua.domain.Role">
+    <!--@mbg.generated-->
+    <!--@Table `role`-->
+    <id column="roleId" jdbcType="SMALLINT" property="roleid" />
+    <result column="marking" jdbcType="VARCHAR" property="marking" />
+    <result column="isSystem" jdbcType="BOOLEAN" property="issystem" />
+    <result column="isBind" jdbcType="BOOLEAN" property="isbind" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    roleId, marking, isSystem, isBind, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from `role`
+    where roleId = #{roleid,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    <!--@mbg.generated-->
+    delete from `role`
+    where roleId = #{roleid,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.poindre.shua.domain.Role">
+    <!--@mbg.generated-->
+    insert into `role` (roleId, marking, isSystem, 
+      isBind, description)
+    values (#{roleid,jdbcType=SMALLINT}, #{marking,jdbcType=VARCHAR}, #{issystem,jdbcType=BOOLEAN}, 
+      #{isbind,jdbcType=BOOLEAN}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.poindre.shua.domain.Role">
+    <!--@mbg.generated-->
+    insert into `role`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        roleId,
+      </if>
+      <if test="marking != null">
+        marking,
+      </if>
+      <if test="issystem != null">
+        isSystem,
+      </if>
+      <if test="isbind != null">
+        isBind,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        #{roleid,jdbcType=SMALLINT},
+      </if>
+      <if test="marking != null">
+        #{marking,jdbcType=VARCHAR},
+      </if>
+      <if test="issystem != null">
+        #{issystem,jdbcType=BOOLEAN},
+      </if>
+      <if test="isbind != null">
+        #{isbind,jdbcType=BOOLEAN},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.domain.Role">
+    <!--@mbg.generated-->
+    update `role`
+    <set>
+      <if test="marking != null">
+        marking = #{marking,jdbcType=VARCHAR},
+      </if>
+      <if test="issystem != null">
+        isSystem = #{issystem,jdbcType=BOOLEAN},
+      </if>
+      <if test="isbind != null">
+        isBind = #{isbind,jdbcType=BOOLEAN},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where roleId = #{roleid,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.domain.Role">
+    <!--@mbg.generated-->
+    update `role`
+    set marking = #{marking,jdbcType=VARCHAR},
+      isSystem = #{issystem,jdbcType=BOOLEAN},
+      isBind = #{isbind,jdbcType=BOOLEAN},
+      description = #{description,jdbcType=VARCHAR}
+    where roleId = #{roleid,jdbcType=SMALLINT}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update `role`
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="marking = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when roleId = #{item.roleid,jdbcType=SMALLINT} then #{item.marking,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="isSystem = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when roleId = #{item.roleid,jdbcType=SMALLINT} then #{item.issystem,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="isBind = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when roleId = #{item.roleid,jdbcType=SMALLINT} then #{item.isbind,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="description = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when roleId = #{item.roleid,jdbcType=SMALLINT} then #{item.description,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where roleId in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.roleid,jdbcType=SMALLINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update `role`
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="marking = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.marking != null">
+            when roleId = #{item.roleid,jdbcType=SMALLINT} then #{item.marking,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="isSystem = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.issystem != null">
+            when roleId = #{item.roleid,jdbcType=SMALLINT} then #{item.issystem,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="isBind = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isbind != null">
+            when roleId = #{item.roleid,jdbcType=SMALLINT} then #{item.isbind,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="description = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.description != null">
+            when roleId = #{item.roleid,jdbcType=SMALLINT} then #{item.description,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where roleId in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.roleid,jdbcType=SMALLINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into `role`
+    (roleId, marking, isSystem, isBind, description)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.roleid,jdbcType=SMALLINT}, #{item.marking,jdbcType=VARCHAR}, #{item.issystem,jdbcType=BOOLEAN}, 
+        #{item.isbind,jdbcType=BOOLEAN}, #{item.description,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.poindre.shua.domain.Role">
+    <!--@mbg.generated-->
+    insert into `role`
+    (roleId, marking, isSystem, isBind, description)
+    values
+    (#{roleid,jdbcType=SMALLINT}, #{marking,jdbcType=VARCHAR}, #{issystem,jdbcType=BOOLEAN}, 
+      #{isbind,jdbcType=BOOLEAN}, #{description,jdbcType=VARCHAR})
+    on duplicate key update 
+    roleId = #{roleid,jdbcType=SMALLINT}, 
+    marking = #{marking,jdbcType=VARCHAR}, 
+    isSystem = #{issystem,jdbcType=BOOLEAN}, 
+    isBind = #{isbind,jdbcType=BOOLEAN}, 
+    description = #{description,jdbcType=VARCHAR}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.domain.Role">
+    <!--@mbg.generated-->
+    insert into `role`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        roleId,
+      </if>
+      <if test="marking != null">
+        marking,
+      </if>
+      <if test="issystem != null">
+        isSystem,
+      </if>
+      <if test="isbind != null">
+        isBind,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        #{roleid,jdbcType=SMALLINT},
+      </if>
+      <if test="marking != null">
+        #{marking,jdbcType=VARCHAR},
+      </if>
+      <if test="issystem != null">
+        #{issystem,jdbcType=BOOLEAN},
+      </if>
+      <if test="isbind != null">
+        #{isbind,jdbcType=BOOLEAN},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="roleid != null">
+        roleId = #{roleid,jdbcType=SMALLINT},
+      </if>
+      <if test="marking != null">
+        marking = #{marking,jdbcType=VARCHAR},
+      </if>
+      <if test="issystem != null">
+        isSystem = #{issystem,jdbcType=BOOLEAN},
+      </if>
+      <if test="isbind != null">
+        isBind = #{isbind,jdbcType=BOOLEAN},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

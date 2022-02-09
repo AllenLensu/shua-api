@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.mapper.UserAccountInfoMapper">
+  <resultMap id="BaseResultMap" type="com.poindre.shua.domain.UserAccountInfo">
+    <!--@mbg.generated-->
+    <!--@Table user_account_info-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="experience" jdbcType="BIGINT" property="experience" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="isEmailVerify" jdbcType="BOOLEAN" property="isemailverify" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="isPhoneVerify" jdbcType="BOOLEAN" property="isphoneverify" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="createTime" jdbcType="DATE" property="createtime" />
+    <result column="lastActiveTime" jdbcType="TIMESTAMP" property="lastactivetime" />
+    <result column="followers" jdbcType="BIGINT" property="followers" />
+    <result column="following" jdbcType="BIGINT" property="following" />
+    <result column="isBanned" jdbcType="BOOLEAN" property="isbanned" />
+    <result column="banReason" jdbcType="VARCHAR" property="banreason" />
+    <result column="banDeadline" jdbcType="DATE" property="bandeadline" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, uuid, experience, grade, score, email, isEmailVerify, phone, isPhoneVerify, `status`, 
+    createTime, lastActiveTime, followers, `following`, isBanned, banReason, banDeadline
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from user_account_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from user_account_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.UserAccountInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into user_account_info (uuid, experience, grade, 
+      score, email, isEmailVerify, 
+      phone, isPhoneVerify, `status`, 
+      createTime, lastActiveTime, followers, 
+      `following`, isBanned, banReason, 
+      banDeadline)
+    values (#{uuid,jdbcType=VARCHAR}, #{experience,jdbcType=BIGINT}, #{grade,jdbcType=INTEGER}, 
+      #{score,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{isemailverify,jdbcType=BOOLEAN}, 
+      #{phone,jdbcType=VARCHAR}, #{isphoneverify,jdbcType=BOOLEAN}, #{status,jdbcType=SMALLINT}, 
+      #{createtime,jdbcType=DATE}, #{lastactivetime,jdbcType=TIMESTAMP}, #{followers,jdbcType=BIGINT}, 
+      #{following,jdbcType=BIGINT}, #{isbanned,jdbcType=BOOLEAN}, #{banreason,jdbcType=VARCHAR}, 
+      #{bandeadline,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.UserAccountInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into user_account_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="experience != null">
+        experience,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="isemailverify != null">
+        isEmailVerify,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="isphoneverify != null">
+        isPhoneVerify,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastactivetime != null">
+        lastActiveTime,
+      </if>
+      <if test="followers != null">
+        followers,
+      </if>
+      <if test="following != null">
+        `following`,
+      </if>
+      <if test="isbanned != null">
+        isBanned,
+      </if>
+      <if test="banreason != null">
+        banReason,
+      </if>
+      <if test="bandeadline != null">
+        banDeadline,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        #{experience,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isemailverify != null">
+        #{isemailverify,jdbcType=BOOLEAN},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isphoneverify != null">
+        #{isphoneverify,jdbcType=BOOLEAN},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="lastactivetime != null">
+        #{lastactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followers != null">
+        #{followers,jdbcType=BIGINT},
+      </if>
+      <if test="following != null">
+        #{following,jdbcType=BIGINT},
+      </if>
+      <if test="isbanned != null">
+        #{isbanned,jdbcType=BOOLEAN},
+      </if>
+      <if test="banreason != null">
+        #{banreason,jdbcType=VARCHAR},
+      </if>
+      <if test="bandeadline != null">
+        #{bandeadline,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.domain.UserAccountInfo">
+    <!--@mbg.generated-->
+    update user_account_info
+    <set>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        experience = #{experience,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isemailverify != null">
+        isEmailVerify = #{isemailverify,jdbcType=BOOLEAN},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isphoneverify != null">
+        isPhoneVerify = #{isphoneverify,jdbcType=BOOLEAN},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="lastactivetime != null">
+        lastActiveTime = #{lastactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followers != null">
+        followers = #{followers,jdbcType=BIGINT},
+      </if>
+      <if test="following != null">
+        `following` = #{following,jdbcType=BIGINT},
+      </if>
+      <if test="isbanned != null">
+        isBanned = #{isbanned,jdbcType=BOOLEAN},
+      </if>
+      <if test="banreason != null">
+        banReason = #{banreason,jdbcType=VARCHAR},
+      </if>
+      <if test="bandeadline != null">
+        banDeadline = #{bandeadline,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.domain.UserAccountInfo">
+    <!--@mbg.generated-->
+    update user_account_info
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      isEmailVerify = #{isemailverify,jdbcType=BOOLEAN},
+      phone = #{phone,jdbcType=VARCHAR},
+      isPhoneVerify = #{isphoneverify,jdbcType=BOOLEAN},
+      `status` = #{status,jdbcType=SMALLINT},
+      createTime = #{createtime,jdbcType=DATE},
+      lastActiveTime = #{lastactivetime,jdbcType=TIMESTAMP},
+      followers = #{followers,jdbcType=BIGINT},
+      `following` = #{following,jdbcType=BIGINT},
+      isBanned = #{isbanned,jdbcType=BOOLEAN},
+      banReason = #{banreason,jdbcType=VARCHAR},
+      banDeadline = #{bandeadline,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update user_account_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="uuid = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="experience = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.experience,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="grade = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.grade,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="score = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.score,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="email = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.email,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="isEmailVerify = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.isemailverify,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="phone = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.phone,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="isPhoneVerify = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.isphoneverify,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="`status` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.status,jdbcType=SMALLINT}
+        </foreach>
+      </trim>
+      <trim prefix="createTime = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createtime,jdbcType=DATE}
+        </foreach>
+      </trim>
+      <trim prefix="lastActiveTime = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.lastactivetime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="followers = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.followers,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="`following` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.following,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="isBanned = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.isbanned,jdbcType=BOOLEAN}
+        </foreach>
+      </trim>
+      <trim prefix="banReason = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.banreason,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="banDeadline = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.bandeadline,jdbcType=DATE}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update user_account_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="uuid = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.uuid != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="experience = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.experience != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.experience,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="grade = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.grade != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.grade,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="score = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.score != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.score,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="email = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.email != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.email,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="isEmailVerify = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isemailverify != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.isemailverify,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="phone = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.phone != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.phone,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="isPhoneVerify = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isphoneverify != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.isphoneverify,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`status` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.status != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.status,jdbcType=SMALLINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="createTime = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createtime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.createtime,jdbcType=DATE}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="lastActiveTime = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.lastactivetime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.lastactivetime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="followers = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.followers != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.followers,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`following` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.following != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.following,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="isBanned = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isbanned != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.isbanned,jdbcType=BOOLEAN}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="banReason = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.banreason != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.banreason,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="banDeadline = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.bandeadline != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.bandeadline,jdbcType=DATE}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into user_account_info
+    (uuid, experience, grade, score, email, isEmailVerify, phone, isPhoneVerify, `status`, 
+      createTime, lastActiveTime, followers, `following`, isBanned, banReason, banDeadline
+      )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.uuid,jdbcType=VARCHAR}, #{item.experience,jdbcType=BIGINT}, #{item.grade,jdbcType=INTEGER}, 
+        #{item.score,jdbcType=INTEGER}, #{item.email,jdbcType=VARCHAR}, #{item.isemailverify,jdbcType=BOOLEAN}, 
+        #{item.phone,jdbcType=VARCHAR}, #{item.isphoneverify,jdbcType=BOOLEAN}, #{item.status,jdbcType=SMALLINT}, 
+        #{item.createtime,jdbcType=DATE}, #{item.lastactivetime,jdbcType=TIMESTAMP}, #{item.followers,jdbcType=BIGINT}, 
+        #{item.following,jdbcType=BIGINT}, #{item.isbanned,jdbcType=BOOLEAN}, #{item.banreason,jdbcType=VARCHAR}, 
+        #{item.bandeadline,jdbcType=DATE})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.UserAccountInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into user_account_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      uuid,
+      experience,
+      grade,
+      score,
+      email,
+      isEmailVerify,
+      phone,
+      isPhoneVerify,
+      `status`,
+      createTime,
+      lastActiveTime,
+      followers,
+      `following`,
+      isBanned,
+      banReason,
+      banDeadline,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      #{uuid,jdbcType=VARCHAR},
+      #{experience,jdbcType=BIGINT},
+      #{grade,jdbcType=INTEGER},
+      #{score,jdbcType=INTEGER},
+      #{email,jdbcType=VARCHAR},
+      #{isemailverify,jdbcType=BOOLEAN},
+      #{phone,jdbcType=VARCHAR},
+      #{isphoneverify,jdbcType=BOOLEAN},
+      #{status,jdbcType=SMALLINT},
+      #{createtime,jdbcType=DATE},
+      #{lastactivetime,jdbcType=TIMESTAMP},
+      #{followers,jdbcType=BIGINT},
+      #{following,jdbcType=BIGINT},
+      #{isbanned,jdbcType=BOOLEAN},
+      #{banreason,jdbcType=VARCHAR},
+      #{bandeadline,jdbcType=DATE},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      uuid = #{uuid,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      isEmailVerify = #{isemailverify,jdbcType=BOOLEAN},
+      phone = #{phone,jdbcType=VARCHAR},
+      isPhoneVerify = #{isphoneverify,jdbcType=BOOLEAN},
+      `status` = #{status,jdbcType=SMALLINT},
+      createTime = #{createtime,jdbcType=DATE},
+      lastActiveTime = #{lastactivetime,jdbcType=TIMESTAMP},
+      followers = #{followers,jdbcType=BIGINT},
+      `following` = #{following,jdbcType=BIGINT},
+      isBanned = #{isbanned,jdbcType=BOOLEAN},
+      banReason = #{banreason,jdbcType=VARCHAR},
+      banDeadline = #{bandeadline,jdbcType=DATE},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.UserAccountInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into user_account_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="experience != null">
+        experience,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="isemailverify != null">
+        isEmailVerify,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="isphoneverify != null">
+        isPhoneVerify,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastactivetime != null">
+        lastActiveTime,
+      </if>
+      <if test="followers != null">
+        followers,
+      </if>
+      <if test="following != null">
+        `following`,
+      </if>
+      <if test="isbanned != null">
+        isBanned,
+      </if>
+      <if test="banreason != null">
+        banReason,
+      </if>
+      <if test="bandeadline != null">
+        banDeadline,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        #{experience,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isemailverify != null">
+        #{isemailverify,jdbcType=BOOLEAN},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isphoneverify != null">
+        #{isphoneverify,jdbcType=BOOLEAN},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="lastactivetime != null">
+        #{lastactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followers != null">
+        #{followers,jdbcType=BIGINT},
+      </if>
+      <if test="following != null">
+        #{following,jdbcType=BIGINT},
+      </if>
+      <if test="isbanned != null">
+        #{isbanned,jdbcType=BOOLEAN},
+      </if>
+      <if test="banreason != null">
+        #{banreason,jdbcType=VARCHAR},
+      </if>
+      <if test="bandeadline != null">
+        #{bandeadline,jdbcType=DATE},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null">
+        experience = #{experience,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isemailverify != null">
+        isEmailVerify = #{isemailverify,jdbcType=BOOLEAN},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isphoneverify != null">
+        isPhoneVerify = #{isphoneverify,jdbcType=BOOLEAN},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="lastactivetime != null">
+        lastActiveTime = #{lastactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followers != null">
+        followers = #{followers,jdbcType=BIGINT},
+      </if>
+      <if test="following != null">
+        `following` = #{following,jdbcType=BIGINT},
+      </if>
+      <if test="isbanned != null">
+        isBanned = #{isbanned,jdbcType=BOOLEAN},
+      </if>
+      <if test="banreason != null">
+        banReason = #{banreason,jdbcType=VARCHAR},
+      </if>
+      <if test="bandeadline != null">
+        banDeadline = #{bandeadline,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>
