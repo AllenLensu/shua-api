@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.poindre'
-version = '0.0.1-SNAPSHOT'
+version = '1.1.0.8'
 sourceCompatibility = '11'
 
 configurations {
@@ -19,9 +19,13 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.alibaba:fastjson:1.2.79'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'

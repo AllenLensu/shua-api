@@ -1,13 +1,16 @@
 package com.poindre.shua.service.impl;
 
+import com.poindre.shua.domain.UserAccount;
+import com.poindre.shua.mapper.UserAccountMapper;
+import com.poindre.shua.service.UserAccountService;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.List;
-import com.poindre.shua.mapper.UserAccountMapper;
-import com.poindre.shua.domain.UserAccount;
-import com.poindre.shua.service.UserAccountService;
+
 @Service
-public class UserAccountServiceImpl implements UserAccountService{
+public class UserAccountServiceImpl implements UserAccountService {
 
     @Resource
     private UserAccountMapper userAccountMapper;

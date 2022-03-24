@@ -1,5 +1,6 @@
 package com.poindre.shua.mapper;
 
+import com.poindre.shua.domain.PersonalUserInfo;
 import com.poindre.shua.domain.UserInfo;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
@@ -58,4 +59,8 @@ public interface UserInfoMapper {
     int updateBatchSelective(List<UserInfo> list);
 
     int batchInsert(@Param("list") List<UserInfo> list);
+
+    PersonalUserInfo selectByUuid(String id);
+
+    List<UserInfo> findAllUser();
 }

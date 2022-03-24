@@ -1,9 +1,11 @@
 package com.poindre.shua.service;
 
 import java.util.List;
+
+import com.poindre.shua.domain.PersonalUserInfo;
 import com.poindre.shua.domain.UserInfo;
 public interface UserInfoService{
-
+    PersonalUserInfo selectByUuid(String id);
 
     int deleteByPrimaryKey(String id);
 
@@ -27,4 +29,5 @@ public interface UserInfoService{
 
     int batchInsert(List<UserInfo> list);
 
+    List<UserInfo> findAllUser();
 }

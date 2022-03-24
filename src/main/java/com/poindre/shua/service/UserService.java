@@ -27,4 +27,5 @@ public interface UserService{
 
     int batchInsert(List<User> list);
 
+    String getUuid(String username);
 }

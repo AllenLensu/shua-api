@@ -67,4 +67,9 @@ public class UserServiceImpl implements UserService{
         return userMapper.batchInsert(list);
     }
 
+    @Override
+    public String getUuid(String username) {
+        return userMapper.getUuid(username);
+    }
+
 }

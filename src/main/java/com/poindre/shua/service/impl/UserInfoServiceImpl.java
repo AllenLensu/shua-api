@@ -1,5 +1,6 @@
 package com.poindre.shua.service.impl;
 
+import com.poindre.shua.domain.PersonalUserInfo;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -11,6 +12,11 @@ public class UserInfoServiceImpl implements UserInfoService{
 
     @Resource
     private UserInfoMapper userInfoMapper;
+
+    @Override
+    public PersonalUserInfo selectByUuid(String id) {
+        return userInfoMapper.selectByUuid(id);
+    }
 
     @Override
     public int deleteByPrimaryKey(String id) {
@@ -65,6 +71,11 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Override
     public int batchInsert(List<UserInfo> list) {
         return userInfoMapper.batchInsert(list);
+    }
+
+    @Override
+    public List<UserInfo> findAllUser() {
+        return userInfoMapper.findAllUser();
     }
 
 }

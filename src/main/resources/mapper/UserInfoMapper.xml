@@ -14,6 +14,18 @@
     <result column="signature" jdbcType="VARCHAR" property="signature" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
   </resultMap>
+  <resultMap id="UserInfoMap" type="com.poindre.shua.domain.PersonalUserInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="username" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="gender" jdbcType="SMALLINT" property="gender" />
+    <result column="age" jdbcType="SMALLINT" property="age" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="resident" jdbcType="VARCHAR" property="resident" />
+    <result column="household" jdbcType="VARCHAR" property="household" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+  </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, `name`, gender, age, birthday, resident, household, signature, introduction
@@ -387,4 +399,12 @@
       </if>
     </trim>
   </insert>
+
+  <select id="selectByUuid" parameterType="java.lang.String" resultMap="UserInfoMap">
+    select user_info.id as id, uid, name, gender, age, birthday, resident, household, signature, introduction from user_info join user where user.uuid = user_info.id and user_info.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findAllUser" resultMap="BaseResultMap">
+    select * from user_info
+  </select>
 </mapper>

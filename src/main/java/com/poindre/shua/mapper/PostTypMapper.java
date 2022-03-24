@@ -1,71 +1,61 @@
 package com.poindre.shua.mapper;
 
-import com.poindre.shua.domain.User;
+import com.poindre.shua.domain.PostType;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface UserMapper {
+public interface PostTypMapper {
     /**
      * delete by primary key
-     *
-     * @param id primaryKey
+     * @param typeid primaryKey
      * @return deleteCount
      */
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer typeid);
 
     /**
      * insert record to table
-     *
      * @param record the record
      * @return insert count
      */
-    int insert(User record);
+    int insert(PostType record);
 
-    int insertOrUpdate(User record);
+    int insertOrUpdate(PostType record);
 
-    int insertOrUpdateSelective(User record);
+    int insertOrUpdateSelective(PostType record);
 
     /**
      * insert record to table selective
-     *
      * @param record the record
      * @return insert count
      */
-    int insertSelective(User record);
+    int insertSelective(PostType record);
 
     /**
      * select by primary key
-     *
-     * @param id primary key
+     * @param typeid primary key
      * @return object by primary key
      */
-    User selectByPrimaryKey(Long id);
+    PostType selectByPrimaryKey(Integer typeid);
 
     /**
      * update record selective
-     *
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(PostType record);
 
     /**
      * update record
-     *
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(User record);
+    int updateByPrimaryKey(PostType record);
 
-    int updateBatch(List<User> list);
+    int updateBatch(List<PostType> list);
 
-    int updateBatchSelective(List<User> list);
+    int updateBatchSelective(List<PostType> list);
 
-    int batchInsert(@Param("list") List<User> list);
-
-    User find(String account);
-
-    String getUuid(String username);
+    int batchInsert(@Param("list") List<PostType> list);
 }

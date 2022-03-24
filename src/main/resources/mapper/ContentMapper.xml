@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.mapper.ContentMapper">
+    <resultMap id="BaseResultMap" type="com.poindre.shua.domain.Content">
+        <!--@mbg.generated-->
+        <!--@Table content-->
+        <id column="contentId" jdbcType="BIGINT" property="contentid"/>
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+    </resultMap>
+    <resultMap id="PostContentMap" type="com.poindre.shua.domain.DetailContent">
+        <id column="contentId" jdbcType="BIGINT" property="contentid"/>
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid" />
+        <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        contentId, id, content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from content
+        where contentId = #{contentid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from content
+        where contentId = #{contentid,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="contentId" keyProperty="contentid" parameterType="com.poindre.shua.domain.Content"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content (id, content)
+        values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="contentId" keyProperty="contentid"
+            parameterType="com.poindre.shua.domain.Content" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.domain.Content">
+        <!--@mbg.generated-->
+        update content
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where contentId = #{contentid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.domain.Content">
+        <!--@mbg.generated-->
+        update content
+        set id = #{id,jdbcType=BIGINT},
+        content = #{content,jdbcType=VARCHAR}
+        where contentId = #{contentid,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update content
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when contentId = #{item.contentid,jdbcType=BIGINT} then #{item.id,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="content = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when contentId = #{item.contentid,jdbcType=BIGINT} then #{item.content,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+        </trim>
+        where contentId in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.contentid,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update content
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.id != null">
+                        when contentId = #{item.contentid,jdbcType=BIGINT} then #{item.id,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="content = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.content != null">
+                        when contentId = #{item.contentid,jdbcType=BIGINT} then #{item.content,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where contentId in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.contentid,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="contentId" keyProperty="contentid" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content
+        (id, content)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=BIGINT}, #{item.content,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="contentId" keyProperty="contentid"
+            parameterType="com.poindre.shua.domain.Content" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contentid != null">
+                contentId,
+            </if>
+            id,
+            content,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contentid != null">
+                #{contentid,jdbcType=BIGINT},
+            </if>
+            #{id,jdbcType=BIGINT},
+            #{content,jdbcType=VARCHAR},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="contentid != null">
+                contentId = #{contentid,jdbcType=BIGINT},
+            </if>
+            id = #{id,jdbcType=BIGINT},
+            content = #{content,jdbcType=VARCHAR},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="contentId" keyProperty="contentid"
+            parameterType="com.poindre.shua.domain.Content" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contentid != null">
+                contentId,
+            </if>
+            <if test="id != null">
+                id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contentid != null">
+                #{contentid,jdbcType=BIGINT},
+            </if>
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="contentid != null">
+                contentId = #{contentid,jdbcType=BIGINT},
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findAllPosts" resultMap="PostContentMap">
+        select contentId, content.id, content, u.uid, u.uuid from content join user u on content.id = u.id order by contentId desc
+    </select>
+</mapper>

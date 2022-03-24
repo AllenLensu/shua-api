@@ -2,6 +2,8 @@ package com.poindre.shua.service;
 
 import java.util.List;
 import com.poindre.shua.domain.UserAccount;
+import org.springframework.lang.Nullable;
+
 public interface UserAccountService{
 
 

@@ -188,4 +188,12 @@
       </if>
     </trim>
   </insert>
+
+  <select id="find" resultType="com.poindre.shua.domain.User">
+    select * from user where uid=#{account,jdbcType=VARCHAR} or uuid=#{account,jdbcType=VARCHAR} or id=#{account,jdbcType=BIGINT}
+  </select>
+
+  <select id="getUuid" resultType="java.lang.String">
+    select uuid from user where uid=#{account,jdbcType=VARCHAR}
+    </select>
 </mapper>

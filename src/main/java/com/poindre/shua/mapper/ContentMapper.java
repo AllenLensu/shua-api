@@ -1,19 +1,21 @@
 package com.poindre.shua.mapper;
 
-import com.poindre.shua.domain.User;
-import java.util.List;
+import com.poindre.shua.domain.Content;
+import com.poindre.shua.domain.DetailContent;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
-public interface UserMapper {
+public interface ContentMapper {
     /**
      * delete by primary key
      *
-     * @param id primaryKey
+     * @param contentid primaryKey
      * @return deleteCount
      */
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long contentid);
 
     /**
      * insert record to table
@@ -21,11 +23,11 @@ public interface UserMapper {
      * @param record the record
      * @return insert count
      */
-    int insert(User record);
+    int insert(Content record);
 
-    int insertOrUpdate(User record);
+    int insertOrUpdate(Content record);
 
-    int insertOrUpdateSelective(User record);
+    int insertOrUpdateSelective(Content record);
 
     /**
      * insert record to table selective
@@ -33,15 +35,15 @@ public interface UserMapper {
      * @param record the record
      * @return insert count
      */
-    int insertSelective(User record);
+    int insertSelective(Content record);
 
     /**
      * select by primary key
      *
-     * @param id primary key
+     * @param contentid primary key
      * @return object by primary key
      */
-    User selectByPrimaryKey(Long id);
+    Content selectByPrimaryKey(Long contentid);
 
     /**
      * update record selective
@@ -49,7 +51,7 @@ public interface UserMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(Content record);
 
     /**
      * update record
@@ -57,15 +59,13 @@ public interface UserMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(User record);
+    int updateByPrimaryKey(Content record);
 
-    int updateBatch(List<User> list);
+    int updateBatch(List<Content> list);
 
-    int updateBatchSelective(List<User> list);
+    int updateBatchSelective(List<Content> list);
 
-    int batchInsert(@Param("list") List<User> list);
+    int batchInsert(@Param("list") List<Content> list);
 
-    User find(String account);
-
-    String getUuid(String username);
+    List<DetailContent> findAllPosts();
 }
