@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.poindre.shua.mapper.UserInfoMapper">
-  <resultMap id="BaseResultMap" type="com.poindre.shua.domain.UserInfo">
+<mapper namespace="com.poindre.shua.user.info.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.poindre.shua.user.info.UserInfo">
     <!--@mbg.generated-->
     <!--@Table user_info-->
     <id column="id" jdbcType="VARCHAR" property="id" />
@@ -14,7 +14,7 @@
     <result column="signature" jdbcType="VARCHAR" property="signature" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
   </resultMap>
-  <resultMap id="UserInfoMap" type="com.poindre.shua.domain.PersonalUserInfo">
+  <resultMap id="UserInfoMap" type="com.poindre.shua.user.info.PersonalUserInfo">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="uid" jdbcType="VARCHAR" property="username" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -42,7 +42,7 @@
     delete from user_info
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.poindre.shua.domain.UserInfo">
+  <insert id="insert" parameterType="com.poindre.shua.user.info.UserInfo">
     <!--@mbg.generated-->
     insert into user_info (id, `name`, gender, 
       age, birthday, resident, 
@@ -53,7 +53,7 @@
       #{household,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.poindre.shua.domain.UserInfo">
+  <insert id="insertSelective" parameterType="com.poindre.shua.user.info.UserInfo">
     <!--@mbg.generated-->
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -115,7 +115,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.domain.UserInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.user.info.UserInfo">
     <!--@mbg.generated-->
     update user_info
     <set>
@@ -146,7 +146,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.domain.UserInfo">
+  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.user.info.UserInfo">
     <!--@mbg.generated-->
     update user_info
     set `name` = #{name,jdbcType=VARCHAR},
@@ -287,7 +287,7 @@
         )
     </foreach>
   </insert>
-  <insert id="insertOrUpdate" parameterType="com.poindre.shua.domain.UserInfo">
+  <insert id="insertOrUpdate" parameterType="com.poindre.shua.user.info.UserInfo">
     <!--@mbg.generated-->
     insert into user_info
     (id, `name`, gender, age, birthday, resident, household, signature, introduction)
@@ -306,7 +306,7 @@
     signature = #{signature,jdbcType=VARCHAR}, 
     introduction = #{introduction,jdbcType=VARCHAR}
   </insert>
-  <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.domain.UserInfo">
+  <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.user.info.UserInfo">
     <!--@mbg.generated-->
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">

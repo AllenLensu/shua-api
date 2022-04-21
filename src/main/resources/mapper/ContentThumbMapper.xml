@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.post.thumb.ContentThumbMapper">
+  <resultMap id="BaseResultMap" type="com.poindre.shua.post.thumb.ContentThumb">
+    <!--@mbg.generated-->
+    <!--@Table content_thumb-->
+    <result column="content_id" jdbcType="BIGINT" property="contentId" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    content_id, uuid, `time`
+  </sql>
+  <insert id="insert" parameterType="com.poindre.shua.post.thumb.ContentThumb">
+    <!--@mbg.generated-->
+    insert into content_thumb (content_id, uuid, `time`
+      )
+    values (#{contentId,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.poindre.shua.post.thumb.ContentThumb">
+    <!--@mbg.generated-->
+    insert into content_thumb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into content_thumb
+    (content_id, uuid, `time`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.contentId,jdbcType=BIGINT}, #{item.uuid,jdbcType=VARCHAR}, #{item.time,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.poindre.shua.post.thumb.ContentThumb">
+    <!--@mbg.generated-->
+    insert into content_thumb
+    (content_id, uuid, `time`)
+    values
+    (#{contentId,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+      )
+    on duplicate key update 
+    content_id = #{contentId,jdbcType=BIGINT}, 
+    uuid = #{uuid,jdbcType=VARCHAR}, 
+    `time` = #{time,jdbcType=TIMESTAMP}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.post.thumb.ContentThumb">
+    <!--@mbg.generated-->
+    insert into content_thumb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="contentId != null">
+        content_id = #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

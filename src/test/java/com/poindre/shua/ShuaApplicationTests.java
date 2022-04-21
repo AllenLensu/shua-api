@@ -1,20 +1,31 @@
 package com.poindre.shua;
 
-import com.poindre.shua.domain.UserAccount;
-import com.poindre.shua.service.UserAccountService;
-import com.poindre.shua.service.UserInfoService;
+import com.poindre.shua.account.UserAccount;
+import com.poindre.shua.account.UserAccountService;
+import com.poindre.shua.post.ContentService;
+import com.poindre.shua.tag.TypeService;
+import com.poindre.shua.user.UserService;
+import com.poindre.shua.user.info.UserInfoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import lombok.extern.java.Log;
 
 import javax.annotation.Resource;
 
 @SpringBootTest
+@Log
 class ShuaApplicationTests {
     @Resource
     private UserAccountService userAccountService;
     @Resource
     private UserInfoService userInfoService;
+    @Resource
+    private TypeService typeService;
+    @Resource
+    private ContentService contentService;
+    @Resource
+    private UserService userService;
 
     @Test
     void contextLoads() {
@@ -49,6 +60,11 @@ class ShuaApplicationTests {
         String regex1 = "^[0-9]+$";
         String regex2 = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[0-9])$";
         System.out.println(b.matches(regex2));
+    }
+
+    @Test
+    void testPostType() {
+        System.out.println(contentService.findTypePosts(2));
     }
 
 }

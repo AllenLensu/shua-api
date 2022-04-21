@@ -1,7 +1,7 @@
 package com.poindre.shua.controller;
 
-import com.poindre.shua.domain.UserInfo;
-import com.poindre.shua.service.UserInfoService;
+import com.poindre.shua.user.info.UserInfo;
+import com.poindre.shua.user.info.UserInfoService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.poindre.shua.mapper.UserRoleMapper">
-  <resultMap id="BaseResultMap" type="com.poindre.shua.domain.UserRole">
+<mapper namespace="com.poindre.shua.user.role.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.poindre.shua.user.role.UserRole">
     <!--@mbg.generated-->
     <!--@Table user_role-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -24,12 +24,12 @@
     delete from user_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.UserRole" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.user.role.UserRole" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into user_role (user_id, role_id)
     values (#{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=SMALLINT})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.UserRole" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.user.role.UserRole" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -49,7 +49,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.domain.UserRole">
+  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.user.role.UserRole">
     <!--@mbg.generated-->
     update user_role
     <set>
@@ -62,7 +62,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.domain.UserRole">
+  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.user.role.UserRole">
     <!--@mbg.generated-->
     update user_role
     set user_id = #{userId,jdbcType=VARCHAR},
@@ -122,7 +122,7 @@
       (#{item.userId,jdbcType=VARCHAR}, #{item.roleId,jdbcType=SMALLINT})
     </foreach>
   </insert>
-  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.UserRole" useGeneratedKeys="true">
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.user.role.UserRole" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -149,7 +149,7 @@
       role_id = #{roleId,jdbcType=SMALLINT},
     </trim>
   </insert>
-  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.UserRole" useGeneratedKeys="true">
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.user.role.UserRole" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -188,4 +188,8 @@
       </if>
     </trim>
   </insert>
+
+  <select id="selectByUuid" resultMap="BaseResultMap">
+    select id, user_id, role_id from user_role where user_id = #{uuid,jdbcType=VARCHAR}
+    </select>
 </mapper>

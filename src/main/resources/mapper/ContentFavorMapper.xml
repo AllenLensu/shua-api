@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.post.favor.ContentFavorMapper">
+  <resultMap id="BaseResultMap" type="com.poindre.shua.post.favor.ContentFavor">
+    <!--@mbg.generated-->
+    <!--@Table content_favor-->
+    <id column="content_id" jdbcType="BIGINT" property="contentId" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    content_id, uuid, `time`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from content_favor
+    where content_id = #{contentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from content_favor
+    where content_id = #{contentId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.poindre.shua.post.favor.ContentFavor">
+    <!--@mbg.generated-->
+    insert into content_favor (content_id, uuid, `time`
+      )
+    values (#{contentId,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.poindre.shua.post.favor.ContentFavor">
+    <!--@mbg.generated-->
+    insert into content_favor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.post.favor.ContentFavor">
+    <!--@mbg.generated-->
+    update content_favor
+    <set>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where content_id = #{contentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.post.favor.ContentFavor">
+    <!--@mbg.generated-->
+    update content_favor
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      `time` = #{time,jdbcType=TIMESTAMP}
+    where content_id = #{contentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update content_favor
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="uuid = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when content_id = #{item.contentId,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`time` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when content_id = #{item.contentId,jdbcType=BIGINT} then #{item.time,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where content_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.contentId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update content_favor
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="uuid = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.uuid != null">
+            when content_id = #{item.contentId,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`time` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.time != null">
+            when content_id = #{item.contentId,jdbcType=BIGINT} then #{item.time,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where content_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.contentId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into content_favor
+    (content_id, uuid, `time`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.contentId,jdbcType=BIGINT}, #{item.uuid,jdbcType=VARCHAR}, #{item.time,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.poindre.shua.post.favor.ContentFavor">
+    <!--@mbg.generated-->
+    insert into content_favor
+    (content_id, uuid, `time`)
+    values
+    (#{contentId,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+      )
+    on duplicate key update 
+    content_id = #{contentId,jdbcType=BIGINT}, 
+    uuid = #{uuid,jdbcType=VARCHAR}, 
+    `time` = #{time,jdbcType=TIMESTAMP}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.post.favor.ContentFavor">
+    <!--@mbg.generated-->
+    insert into content_favor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        content_id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contentId != null">
+        #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="contentId != null">
+        content_id = #{contentId,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

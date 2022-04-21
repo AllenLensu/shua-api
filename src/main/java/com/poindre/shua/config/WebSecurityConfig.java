@@ -1,7 +1,7 @@
 package com.poindre.shua.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.poindre.shua.error.ErrorResponse;
+import com.poindre.shua.handler.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -72,8 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout()
-                .logoutSuccessUrl("/verify/logoutSuccess")
-
+                .logoutSuccessHandler((request, response, authentication) -> request.getRequestDispatcher("/verify/logoutSuccess") .forward(request,response))
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint((HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) -> {

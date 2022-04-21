@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.tag.TypeMapper">
+    <resultMap id="BaseResultMap" type="com.poindre.shua.tag.Type">
+        <!--@mbg.generated-->
+        <!--@Table `type`-->
+        <id column="typeId" jdbcType="INTEGER" property="typeid"/>
+        <result column="tag" jdbcType="VARCHAR" property="tag"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="ex" jdbcType="INTEGER" property="ex"/>
+    </resultMap>
+    <resultMap id="CompoundMenuMap" type="com.poindre.shua.tag.Menu">
+        <id column="menu_id" jdbcType="INTEGER" property="id"/>
+        <result column="menu_tag" jdbcType="VARCHAR" property="tag"/>
+        <result column="menu_description" jdbcType="VARCHAR" property="description"/>
+        <result column="menu_icon" jdbcType="VARCHAR" property="icon"/>
+        <collection property="submenus" ofType="com.poindre.shua.tag.SubMenu">
+            <id column="submenu_id" jdbcType="INTEGER" property="id"/>
+            <result column="submenu_tag" jdbcType="VARCHAR" property="tag"/>
+            <result column="submenu_description" jdbcType="VARCHAR" property="description"/>
+        </collection>
+    </resultMap>
+    <resultMap id="CompoundTypeMap" type="com.poindre.shua.tag.Tag">
+        <id column="tag_id" jdbcType="INTEGER" property="value"/>
+        <result column="tag_tag" jdbcType="VARCHAR" property="label"/>
+        <collection property="children" ofType="com.poindre.shua.tag.SubTag">
+            <id column="subtag_id" jdbcType="INTEGER" property="value"/>
+            <result column="subtag_tag" jdbcType="VARCHAR" property="label"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        typeId, tag, description, icon, ex
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from `type`
+        where typeId = #{typeid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete
+        from `type`
+        where typeId = #{typeid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="typeId" keyProperty="typeid" parameterType="com.poindre.shua.tag.Type"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `type` (tag, description, icon, ex)
+        values (#{tag,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
+                #{ex,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="typeId" keyProperty="typeid" parameterType="com.poindre.shua.tag.Type"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `type`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tag != null">
+                tag,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="ex != null">
+                ex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="ex != null">
+                #{ex,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.tag.Type">
+        <!--@mbg.generated-->
+        update `type`
+        <set>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="ex != null">
+                ex = #{ex,jdbcType=INTEGER},
+            </if>
+        </set>
+        where typeId = #{typeid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.tag.Type">
+        <!--@mbg.generated-->
+        update `type`
+        set tag         = #{tag,jdbcType=VARCHAR},
+            description = #{description,jdbcType=VARCHAR},
+            icon        = #{icon,jdbcType=VARCHAR},
+            ex          = #{ex,jdbcType=INTEGER}
+        where typeId = #{typeid,jdbcType=INTEGER}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update `type`
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="tag = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when typeId = #{item.typeid,jdbcType=INTEGER} then #{item.tag,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="description = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when typeId = #{item.typeid,jdbcType=INTEGER} then #{item.description,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="icon = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when typeId = #{item.typeid,jdbcType=INTEGER} then #{item.icon,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="ex = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when typeId = #{item.typeid,jdbcType=INTEGER} then #{item.ex,jdbcType=INTEGER}
+                </foreach>
+            </trim>
+        </trim>
+        where typeId in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.typeid,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update `type`
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="tag = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.tag != null">
+                        when typeId = #{item.typeid,jdbcType=INTEGER} then #{item.tag,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="description = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.description != null">
+                        when typeId = #{item.typeid,jdbcType=INTEGER} then #{item.description,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="icon = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.icon != null">
+                        when typeId = #{item.typeid,jdbcType=INTEGER} then #{item.icon,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="ex = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.ex != null">
+                        when typeId = #{item.typeid,jdbcType=INTEGER} then #{item.ex,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where typeId in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.typeid,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="typeId" keyProperty="typeid" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `type`
+                (tag, description, icon, ex)
+                values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.tag,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, #{item.icon,jdbcType=VARCHAR},
+             #{item.ex,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="typeId" keyProperty="typeid" parameterType="com.poindre.shua.tag.Type"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `type`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">
+                typeId,
+            </if>
+            tag,
+            description,
+            icon,
+            ex,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">
+                #{typeid,jdbcType=INTEGER},
+            </if>
+            #{tag,jdbcType=VARCHAR},
+            #{description,jdbcType=VARCHAR},
+            #{icon,jdbcType=VARCHAR},
+            #{ex,jdbcType=INTEGER},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="typeid != null">
+                typeId = #{typeid,jdbcType=INTEGER},
+            </if>
+            tag         = #{tag,jdbcType=VARCHAR},
+            description = #{description,jdbcType=VARCHAR},
+            icon        = #{icon,jdbcType=VARCHAR},
+            ex          = #{ex,jdbcType=INTEGER},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="typeId" keyProperty="typeid"
+            parameterType="com.poindre.shua.tag.Type" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `type`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">
+                typeId,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="ex != null">
+                ex,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">
+                #{typeid,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="ex != null">
+                #{ex,jdbcType=INTEGER},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="typeid != null">
+                typeId = #{typeid,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="ex != null">
+                ex = #{ex,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="findContentType" resultMap="CompoundTypeMap">
+        select tag.typeId         as tag_id,
+               tag.tag            as tag_tag,
+               subtag.typeId      as subtag_id,
+               subtag.tag         as subtag_tag
+        from type tag
+                 left join type subtag on subtag.ex = tag.typeId
+        where tag.ex = 0 order by tag.sort;
+    </select>
+
+    <select id="findMenusWithChildren" resultMap="CompoundMenuMap">
+        select menu.typeId         as menu_id,
+               menu.icon           as menu_icon,
+               menu.tag            as menu_tag,
+               menu.description    as menu_description,
+               submenu.typeId      as submenu_id,
+               submenu.icon        as submenu_icon,
+               submenu.tag         as submenu_tag,
+               submenu.description as submenu_description
+        from type menu
+                     left join type submenu on submenu.ex = menu.typeId
+        where menu.ex = 0 order by menu.sort;
+    </select>
+</mapper>

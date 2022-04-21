@@ -1,199 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.poindre.shua.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.poindre.shua.domain.User">
-    <!--@mbg.generated-->
-    <!--@Table `user`-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
-    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, `uid`, uuid
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from `user`
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from `user`
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.User" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into `user` (`uid`, uuid)
-    values (#{uid,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.User" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into `user`
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        `uid`,
-      </if>
-      <if test="uuid != null">
-        uuid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.domain.User">
-    <!--@mbg.generated-->
-    update `user`
-    <set>
-      <if test="uid != null">
-        `uid` = #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="uuid != null">
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.domain.User">
-    <!--@mbg.generated-->
-    update `user`
-    set `uid` = #{uid,jdbcType=VARCHAR},
-      uuid = #{uuid,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update `user`
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`uid` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.uid,jdbcType=VARCHAR}
+<mapper namespace="com.poindre.shua.user.UserMapper">
+    <resultMap id="BaseResultMap" type="com.poindre.shua.user.User">
+        <!--@mbg.generated-->
+        <!--@Table `user`-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `uid`, uuid
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from `user`
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete
+        from `user`
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.user.User"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `user` (`uid`, uuid)
+        values (#{uid,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.user.User"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                `uid`,
+            </if>
+            <if test="uuid != null">
+                uuid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.user.User">
+        <!--@mbg.generated-->
+        update `user`
+        <set>
+            <if test="uid != null">
+                `uid` = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.user.User">
+        <!--@mbg.generated-->
+        update `user`
+        set `uid` = #{uid,jdbcType=VARCHAR},
+            uuid  = #{uuid,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update `user`
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="`uid` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.uid,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="uuid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update `user`
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="`uid` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.uid != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.uid,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.uuid != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update `user`
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`uid` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.uid != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.uid,jdbcType=VARCHAR}
-          </if>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `user`
+            (`uid`, uuid)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.uid,jdbcType=VARCHAR}, #{item.uuid,jdbcType=VARCHAR})
         </foreach>
-      </trim>
-      <trim prefix="uuid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.uuid != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into `user`
-    (`uid`, uuid)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.uid,jdbcType=VARCHAR}, #{item.uuid,jdbcType=VARCHAR})
-    </foreach>
-  </insert>
-  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.User" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into `user`
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      `uid`,
-      uuid,
-    </trim>
-    values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      #{uid,jdbcType=VARCHAR},
-      #{uuid,jdbcType=VARCHAR},
-    </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=BIGINT},
-      </if>
-      `uid` = #{uid,jdbcType=VARCHAR},
-      uuid = #{uuid,jdbcType=VARCHAR},
-    </trim>
-  </insert>
-  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.domain.User" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into `user`
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="uid != null">
-        `uid`,
-      </if>
-      <if test="uuid != null">
-        uuid,
-      </if>
-    </trim>
-    values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
-      </if>
-    </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=BIGINT},
-      </if>
-      <if test="uid != null">
-        `uid` = #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="uuid != null">
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.user.User"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            `uid`,
+            uuid,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            #{uid,jdbcType=VARCHAR},
+            #{uuid,jdbcType=VARCHAR},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            `uid` = #{uid,jdbcType=VARCHAR},
+            uuid  = #{uuid,jdbcType=VARCHAR},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.user.User"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into `user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uid != null">
+                `uid`,
+            </if>
+            <if test="uuid != null">
+                uuid,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                `uid` = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 
-  <select id="find" resultType="com.poindre.shua.domain.User">
-    select * from user where uid=#{account,jdbcType=VARCHAR} or uuid=#{account,jdbcType=VARCHAR} or id=#{account,jdbcType=BIGINT}
-  </select>
+    <select id="find" resultType="com.poindre.shua.user.User">
+        select *
+        from user
+        where uid = #{account,jdbcType=VARCHAR}
+           or uuid = #{account,jdbcType=VARCHAR}
+           or id = #{account,jdbcType=BIGINT}
+    </select>
 
-  <select id="getUuid" resultType="java.lang.String">
-    select uuid from user where uid=#{account,jdbcType=VARCHAR}
+    <select id="getUuid" resultType="java.lang.String">
+        select uuid
+        from user
+        where uid = #{account,jdbcType=VARCHAR}
+    </select>
+
+    <select id="idUuidUnique" resultType="java.lang.Integer">
+        select count(*) from intro.user where uuid = #{uuid, jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByUuid" resultType="com.poindre.shua.user.User">
+        select *
+        from user
+        where uuid = #{account,jdbcType=VARCHAR}
     </select>
 </mapper>

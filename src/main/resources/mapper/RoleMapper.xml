@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.poindre.shua.mapper.RoleMapper">
-  <resultMap id="BaseResultMap" type="com.poindre.shua.domain.Role">
+<mapper namespace="com.poindre.shua.role.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.poindre.shua.role.Role">
     <!--@mbg.generated-->
     <!--@Table `role`-->
     <id column="roleId" jdbcType="SMALLINT" property="roleid" />
@@ -26,14 +26,14 @@
     delete from `role`
     where roleId = #{roleid,jdbcType=SMALLINT}
   </delete>
-  <insert id="insert" parameterType="com.poindre.shua.domain.Role">
+  <insert id="insert" parameterType="com.poindre.shua.role.Role">
     <!--@mbg.generated-->
     insert into `role` (roleId, marking, isSystem, 
       isBind, description)
     values (#{roleid,jdbcType=SMALLINT}, #{marking,jdbcType=VARCHAR}, #{issystem,jdbcType=BOOLEAN}, 
       #{isbind,jdbcType=BOOLEAN}, #{description,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.poindre.shua.domain.Role">
+  <insert id="insertSelective" parameterType="com.poindre.shua.role.Role">
     <!--@mbg.generated-->
     insert into `role`
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -71,7 +71,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.domain.Role">
+  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.role.Role">
     <!--@mbg.generated-->
     update `role`
     <set>
@@ -90,7 +90,7 @@
     </set>
     where roleId = #{roleid,jdbcType=SMALLINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.domain.Role">
+  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.role.Role">
     <!--@mbg.generated-->
     update `role`
     set marking = #{marking,jdbcType=VARCHAR},
@@ -177,7 +177,7 @@
         #{item.isbind,jdbcType=BOOLEAN}, #{item.description,jdbcType=VARCHAR})
     </foreach>
   </insert>
-  <insert id="insertOrUpdate" parameterType="com.poindre.shua.domain.Role">
+  <insert id="insertOrUpdate" parameterType="com.poindre.shua.role.Role">
     <!--@mbg.generated-->
     insert into `role`
     (roleId, marking, isSystem, isBind, description)
@@ -191,7 +191,7 @@
     isBind = #{isbind,jdbcType=BOOLEAN}, 
     description = #{description,jdbcType=VARCHAR}
   </insert>
-  <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.domain.Role">
+  <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.role.Role">
     <!--@mbg.generated-->
     insert into `role`
     <trim prefix="(" suffix=")" suffixOverrides=",">
