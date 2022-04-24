@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ContentFavorMapper {
     /**
      * delete by primary key
+     *
      * @param contentId primaryKey
      * @return deleteCount
      */
@@ -16,6 +17,7 @@ public interface ContentFavorMapper {
 
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -27,6 +29,7 @@ public interface ContentFavorMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
@@ -34,6 +37,7 @@ public interface ContentFavorMapper {
 
     /**
      * select by primary key
+     *
      * @param contentId primary key
      * @return object by primary key
      */
@@ -41,6 +45,7 @@ public interface ContentFavorMapper {
 
     /**
      * update record selective
+     *
      * @param record the updated record
      * @return update count
      */
@@ -48,6 +53,7 @@ public interface ContentFavorMapper {
 
     /**
      * update record
+     *
      * @param record the updated record
      * @return update count
      */
@@ -58,4 +64,8 @@ public interface ContentFavorMapper {
     int updateBatchSelective(List<ContentFavor> list);
 
     int batchInsert(@Param("list") List<ContentFavor> list);
+
+    int deleteByCompundKey(ContentFavor contentFavor);
+
+    int selectByCompundKey(ContentFavor contentFavor);
 }

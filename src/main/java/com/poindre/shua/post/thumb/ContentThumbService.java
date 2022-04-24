@@ -15,4 +15,7 @@ public interface ContentThumbService{
 
     int batchInsert(List<ContentThumb> list);
 
+    int deleteByCompundKey(ContentThumb contentThumb);
+
+    int selectByCompundKey(ContentThumb contentThumb);
 }

@@ -182,4 +182,10 @@
       </if>
     </trim>
   </insert>
+  <delete id="deleteByCompundKey" parameterType="com.poindre.shua.post.favor.ContentFavor">
+    delete from content_favor where uuid=#{uuid,jdbcType=VARCHAR} and content_id=#{contentId,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByCompundKey" parameterType="com.poindre.shua.post.favor.ContentFavor" resultType="Integer">
+    select count(*) from content_favor where uuid=#{uuid,jdbcType=VARCHAR} and content_id=#{contentId,jdbcType=BIGINT}
+  </select>
 </mapper>

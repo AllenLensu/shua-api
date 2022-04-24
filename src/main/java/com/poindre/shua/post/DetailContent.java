@@ -17,4 +17,6 @@ public class DetailContent {
     private String signature;
 
     private LocalDateTime sendTime;
+
+    private String avatar;
 }

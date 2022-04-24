@@ -15,4 +15,8 @@ public interface UserStarService{
 
     int batchInsert(List<UserStar> list);
 
+    List<UserStar> findStaredType(String uuid);
+
+    int deleteType(UserStar userStar);
+
 }

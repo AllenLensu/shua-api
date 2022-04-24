@@ -18,6 +18,7 @@
         <result column="uid" jdbcType="VARCHAR" property="uid"/>
         <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
         <result column="signature" jdbcType="VARCHAR" property="signature"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
@@ -25,18 +26,20 @@
     </sql>
 
     <select id="findAllPosts" resultMap="PostContentMap">
-        select contentId, content.uuid, content, u.uid, i.signature, sendTime
+        select contentId, content.uuid, content, u.uid, i.signature, sendTime, avatar
         from content
                  join user u on content.uuid = u.uuid
                  join user_info i on u.uuid = i.id
+                 join user_account a on a.uuid = u.uuid
         order by sendTime desc
     </select>
 
     <select id="findTypePosts" resultMap="PostContentMap">
-        select contentId, content.uuid, content, u.uid, i.signature, sendTime
+        select contentId, content.uuid, content, u.uid, i.signature, sendTime, avatar
         from content
         join user u on content.uuid = u.uuid
         join user_info i on u.uuid = i.id
+        join user_account a on a.uuid = u.uuid
         where content.type = #{id, jdbcType=INTEGER}
         order by sendTime desc
     </select>
@@ -46,4 +49,14 @@
         #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{type_ex,jdbcType=INTEGER},
         #{sendTime,jdbcType=TIMESTAMP})
     </insert>
+
+    <select id="findById" resultMap="PostContentMap">
+        select contentId, content.uuid, content, u.uid, i.signature, sendTime, avatar
+        from content
+        join user u on content.uuid = u.uuid
+        join user_info i on u.uuid = i.id
+        join user_account a on a.uuid = u.uuid
+        where content.contentId = #{id, jdbcType=INTEGER}
+        order by sendTime desc limit 1
+    </select>
 </mapper>

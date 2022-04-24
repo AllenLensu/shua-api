@@ -15,9 +15,6 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
-web:
-  url: "http://localhost:18000/"
-
 avatar:
   path: "C:/Users/lensu/Pictures/tmp/"
 

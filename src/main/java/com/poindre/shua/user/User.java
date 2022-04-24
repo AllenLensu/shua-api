@@ -8,7 +8,6 @@ public class User {
      * 适用于用户uuid的自增序列
      */
     private Long id;
-
     /**
      * 适用于用户的个人标识
      */

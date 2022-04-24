@@ -1,12 +1,15 @@
 package com.poindre.shua.post.thumb;
 
 import java.util.Date;
+
+import lombok.Builder;
 import lombok.Data;
 
 /**
     * 适用于存储帖子的点赞信息
     */
 @Data
+@Builder
 public class ContentThumb {
     /**
     * 适用于帖子的标识符

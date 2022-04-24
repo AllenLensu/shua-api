@@ -67,4 +67,14 @@ public class ContentFavorServiceImpl implements ContentFavorService{
         return contentFavorMapper.batchInsert(list);
     }
 
+    @Override
+    public int deleteByCompundKey(ContentFavor contentFavor) {
+        return contentFavorMapper.deleteByCompundKey(contentFavor);
+    }
+
+    @Override
+    public int selectByCompundKey(ContentFavor contentFavor) {
+        return contentFavorMapper.selectByCompundKey(contentFavor);
+    }
+
 }

@@ -2,7 +2,7 @@ package com.poindre.shua.post;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class Content {
@@ -18,5 +18,5 @@ public class Content {
 
     private Long hot;
 
-    private LocalDateTime sendTime;
+    private Date sendTime;
 }

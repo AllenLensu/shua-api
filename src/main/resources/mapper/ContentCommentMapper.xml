@@ -334,4 +334,7 @@
       </if>
     </trim>
   </insert>
+  <select id="getCommentFloor" parameterType="Integer" resultType="Integer">
+    select floor from content_comment where content_id = #{id, jdbcType=INTEGER} order by floor desc limit 1
+  </select>
 </mapper>

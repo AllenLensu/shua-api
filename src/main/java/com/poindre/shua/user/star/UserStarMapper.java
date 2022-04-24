@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 public interface UserStarMapper {
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -20,10 +21,15 @@ public interface UserStarMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
     int insertSelective(UserStar record);
 
     int batchInsert(@Param("list") List<UserStar> list);
+
+    List<UserStar> findStaredType(String uuid);
+
+    int deleteType(UserStar userStar);
 }

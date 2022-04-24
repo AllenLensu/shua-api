@@ -37,4 +37,14 @@ public class UserStarServiceImpl implements UserStarService{
         return userStarMapper.batchInsert(list);
     }
 
+    @Override
+    public List<UserStar> findStaredType(String uuid) {
+        return userStarMapper.findStaredType(uuid);
+    }
+
+    @Override
+    public int deleteType(UserStar userStar) {
+        return userStarMapper.deleteType(userStar);
+    }
+
 }

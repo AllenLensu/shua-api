@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ContentThumbMapper {
     /**
      * insert record to table
+     *
      * @param record the record
      * @return insert count
      */
@@ -20,10 +21,15 @@ public interface ContentThumbMapper {
 
     /**
      * insert record to table selective
+     *
      * @param record the record
      * @return insert count
      */
     int insertSelective(ContentThumb record);
 
     int batchInsert(@Param("list") List<ContentThumb> list);
+
+    int deleteByCompundKey(ContentThumb contentThumb);
+
+    int selectByCompundKey(ContentThumb contentThumb);
 }

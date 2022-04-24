@@ -9,4 +9,6 @@ public interface ContentService{
     List<DetailContent> findTypePosts(int id);
 
     int insertPost(Content content);
+
+    DetailContent findById(int id);
 }

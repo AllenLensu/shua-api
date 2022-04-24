@@ -25,4 +25,9 @@ public class ContentServiceImpl implements ContentService{
         return contentMapper.insertPost(content);
     }
 
+    @Override
+    public DetailContent findById(int id) {
+        return contentMapper.findById(id);
+    }
+
 }

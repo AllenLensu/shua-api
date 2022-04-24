@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.user.follow.UserFollowMapper">
+    <resultMap id="BaseResultMap" type="com.poindre.shua.user.follow.UserFollow">
+        <!--@mbg.generated-->
+        <!--@Table user_follow-->
+        <id column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="followed_uuid" jdbcType="VARCHAR" property="followedUuid"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        uuid, followed_uuid, `time`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from user_follow
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from user_follow
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.poindre.shua.user.follow.UserFollow">
+        <!--@mbg.generated-->
+        insert into user_follow (uuid, followed_uuid, `time`
+        )
+        values (#{uuid,jdbcType=VARCHAR}, #{followedUuid,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.poindre.shua.user.follow.UserFollow">
+        <!--@mbg.generated-->
+        insert into user_follow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="followedUuid != null">
+                followed_uuid,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="followedUuid != null">
+                #{followedUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.user.follow.UserFollow">
+        <!--@mbg.generated-->
+        update user_follow
+        <set>
+            <if test="followedUuid != null">
+                followed_uuid = #{followedUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.user.follow.UserFollow">
+        <!--@mbg.generated-->
+        update user_follow
+        set followed_uuid = #{followedUuid,jdbcType=VARCHAR},
+        `time` = #{time,jdbcType=TIMESTAMP}
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update user_follow
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="followed_uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.followedUuid,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.time,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+        </trim>
+        where uuid in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.uuid,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update user_follow
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="followed_uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.followedUuid != null">
+                        when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.followedUuid,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.time != null">
+                        when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.time,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where uuid in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.uuid,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+    <insert id="batchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into user_follow
+        (uuid, followed_uuid, `time`)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.uuid,jdbcType=VARCHAR}, #{item.followedUuid,jdbcType=VARCHAR}, #{item.time,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" parameterType="com.poindre.shua.user.follow.UserFollow">
+        <!--@mbg.generated-->
+        insert into user_follow
+        (uuid, followed_uuid, `time`)
+        values
+        (#{uuid,jdbcType=VARCHAR}, #{followedUuid,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+        )
+        on duplicate key update
+        uuid = #{uuid,jdbcType=VARCHAR},
+        followed_uuid = #{followedUuid,jdbcType=VARCHAR},
+        `time` = #{time,jdbcType=TIMESTAMP}
+    </insert>
+    <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.user.follow.UserFollow">
+        <!--@mbg.generated-->
+        insert into user_follow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="followedUuid != null">
+                followed_uuid,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="followedUuid != null">
+                #{followedUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="followedUuid != null">
+                followed_uuid = #{followedUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <delete id="deleteByCompundKey" parameterType="com.poindre.shua.user.follow.UserFollow">
+        delete from user_follow where uuid=#{uuid,jdbcType=VARCHAR} and followed_uuid=#{followedUuid,jdbcType=VARCHAR}
+    </delete>
+    <select id="selectByCompundKey" parameterType="com.poindre.shua.user.follow.UserFollow" resultType="Integer">
+        select count(*) from user_follow where uuid=#{uuid,jdbcType=VARCHAR} and followed_uuid=#{followedUuid,jdbcType=VARCHAR}
+    </select>
+</mapper>

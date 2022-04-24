@@ -37,4 +37,14 @@ public class ContentThumbServiceImpl implements ContentThumbService{
         return contentThumbMapper.batchInsert(list);
     }
 
+    @Override
+    public int deleteByCompundKey(ContentThumb contentThumb) {
+        return contentThumbMapper.deleteByCompundKey(contentThumb);
+    }
+
+    @Override
+    public int selectByCompundKey(ContentThumb contentThumb) {
+        return contentThumbMapper.selectByCompundKey(contentThumb);
+    }
+
 }

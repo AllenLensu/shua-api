@@ -106,4 +106,10 @@
       </if>
     </trim>
   </insert>
+  <delete id="deleteByCompundKey" parameterType="com.poindre.shua.post.thumb.ContentThumb">
+    delete from content_thumb where uuid=#{uuid,jdbcType=VARCHAR} and content_id=#{contentId,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByCompundKey" parameterType="com.poindre.shua.post.thumb.ContentThumb" resultType="Integer">
+    select count(*) from content_thumb where uuid=#{uuid,jdbcType=VARCHAR} and content_id=#{contentId,jdbcType=BIGINT}
+  </select>
 </mapper>

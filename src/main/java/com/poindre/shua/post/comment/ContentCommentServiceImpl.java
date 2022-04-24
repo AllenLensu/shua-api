@@ -67,4 +67,9 @@ public class ContentCommentServiceImpl implements ContentCommentService{
         return contentCommentMapper.batchInsert(list);
     }
 
+    @Override
+    public int getCommentFloor(Integer id) {
+        return contentCommentMapper.getCommentFloor(id);
+    }
+
 }

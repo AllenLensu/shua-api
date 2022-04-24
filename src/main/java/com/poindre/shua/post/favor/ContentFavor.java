@@ -1,12 +1,15 @@
 package com.poindre.shua.post.favor;
 
 import java.util.Date;
+
+import lombok.Builder;
 import lombok.Data;
 
 /**
     * 适用于存储帖子的收藏信息
     */
 @Data
+@Builder
 public class ContentFavor {
     private Long contentId;
 

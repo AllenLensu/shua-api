@@ -27,4 +27,8 @@ public interface ContentFavorService{
 
     int batchInsert(List<ContentFavor> list);
 
+    int deleteByCompundKey(ContentFavor contentFavor);
+
+    int selectByCompundKey(ContentFavor contentFavor);
+
 }
