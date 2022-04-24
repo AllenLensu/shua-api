@@ -1,340 +1,381 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poindre.shua.post.comment.ContentCommentMapper">
-  <resultMap id="BaseResultMap" type="com.poindre.shua.post.comment.ContentComment">
-    <!--@mbg.generated-->
-    <!--@Table content_comment-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="content_id" jdbcType="BIGINT" property="contentId" />
-    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
-    <result column="floor" jdbcType="INTEGER" property="floor" />
-    <result column="ex" jdbcType="BIGINT" property="ex" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, content_id, uuid, `floor`, ex, `time`, `comment`
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from content_comment
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from content_comment
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.post.comment.ContentComment" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into content_comment (content_id, uuid, `floor`, 
-      ex, `time`, `comment`
-      )
-    values (#{contentId,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER}, 
-      #{ex,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{comment,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.post.comment.ContentComment" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into content_comment
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="contentId != null">
-        content_id,
-      </if>
-      <if test="uuid != null">
-        uuid,
-      </if>
-      <if test="floor != null">
-        `floor`,
-      </if>
-      <if test="ex != null">
-        ex,
-      </if>
-      <if test="time != null">
-        `time`,
-      </if>
-      <if test="comment != null">
-        `comment`,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="contentId != null">
-        #{contentId,jdbcType=BIGINT},
-      </if>
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="floor != null">
-        #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="ex != null">
-        #{ex,jdbcType=BIGINT},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="comment != null">
-        #{comment,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.post.comment.ContentComment">
-    <!--@mbg.generated-->
-    update content_comment
-    <set>
-      <if test="contentId != null">
-        content_id = #{contentId,jdbcType=BIGINT},
-      </if>
-      <if test="uuid != null">
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="floor != null">
-        `floor` = #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="ex != null">
-        ex = #{ex,jdbcType=BIGINT},
-      </if>
-      <if test="time != null">
-        `time` = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="comment != null">
-        `comment` = #{comment,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.post.comment.ContentComment">
-    <!--@mbg.generated-->
-    update content_comment
-    set content_id = #{contentId,jdbcType=BIGINT},
-      uuid = #{uuid,jdbcType=VARCHAR},
-      `floor` = #{floor,jdbcType=INTEGER},
-      ex = #{ex,jdbcType=BIGINT},
-      `time` = #{time,jdbcType=TIMESTAMP},
-      `comment` = #{comment,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update content_comment
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="content_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.contentId,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="uuid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="`floor` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.floor,jdbcType=INTEGER}
-        </foreach>
-      </trim>
-      <trim prefix="ex = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.ex,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="`time` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.time,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="`comment` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.comment,jdbcType=LONGVARCHAR}
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update content_comment
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="content_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.contentId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.contentId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="uuid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.uuid != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="`floor` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.floor != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.floor,jdbcType=INTEGER}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="ex = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.ex != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.ex,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="`time` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.time != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.time,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="`comment` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.comment != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.comment,jdbcType=LONGVARCHAR}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into content_comment
-    (content_id, uuid, `floor`, ex, `time`, `comment`)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.contentId,jdbcType=BIGINT}, #{item.uuid,jdbcType=VARCHAR}, #{item.floor,jdbcType=INTEGER}, 
-        #{item.ex,jdbcType=BIGINT}, #{item.time,jdbcType=TIMESTAMP}, #{item.comment,jdbcType=LONGVARCHAR}
+    <resultMap id="BaseResultMap" type="com.poindre.shua.post.comment.ContentComment">
+        <!--@mbg.generated-->
+        <!--@Table content_comment-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="content_id" jdbcType="BIGINT" property="contentId"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="floor" jdbcType="INTEGER" property="floor"/>
+        <result column="ex" jdbcType="BIGINT" property="ex"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="comment" jdbcType="LONGVARCHAR" property="comment"/>
+    </resultMap>
+    <resultMap id="CompoundCommentMap" type="com.poindre.shua.post.comment.Comment">
+        <id column="comment_id" jdbcType="INTEGER" property="id"/>
+        <result column="comment_content_id" jdbcType="BIGINT" property="contentId"/>
+        <result column="comment_uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="comment_floor" jdbcType="INTEGER" property="floor"/>
+        <result column="comment_time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="comment_comment" jdbcType="VARCHAR" property="comment"/>
+        <collection property="subComments" ofType="com.poindre.shua.post.comment.SubComment">
+            <id column="subcomment_id" jdbcType="INTEGER" property="id"/>
+            <result column="subcomment_content_id" jdbcType="BIGINT" property="contentId"/>
+            <result column="subcomment_uid" jdbcType="VARCHAR" property="uid"/>
+            <result column="subcomment_floor" jdbcType="INTEGER" property="floor"/>
+            <result column="subcomment_time" jdbcType="TIMESTAMP" property="time"/>
+            <result column="subcomment_comment" jdbcType="VARCHAR" property="comment"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, content_id, uid, `floor`, ex, `time`, `comment`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from content_comment
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from content_comment
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.post.comment.ContentComment"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content_comment (content_id, uid, `floor`,
+        ex, `time`, `comment`
         )
-    </foreach>
-  </insert>
-  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.post.comment.ContentComment" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into content_comment
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      content_id,
-      uuid,
-      `floor`,
-      ex,
-      `time`,
-      `comment`,
-    </trim>
-    values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      #{contentId,jdbcType=BIGINT},
-      #{uuid,jdbcType=VARCHAR},
-      #{floor,jdbcType=INTEGER},
-      #{ex,jdbcType=BIGINT},
-      #{time,jdbcType=TIMESTAMP},
-      #{comment,jdbcType=LONGVARCHAR},
-    </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=BIGINT},
-      </if>
-      content_id = #{contentId,jdbcType=BIGINT},
-      uuid = #{uuid,jdbcType=VARCHAR},
-      `floor` = #{floor,jdbcType=INTEGER},
-      ex = #{ex,jdbcType=BIGINT},
-      `time` = #{time,jdbcType=TIMESTAMP},
-      `comment` = #{comment,jdbcType=LONGVARCHAR},
-    </trim>
-  </insert>
-  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.post.comment.ContentComment" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into content_comment
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="contentId != null">
-        content_id,
-      </if>
-      <if test="uuid != null">
-        uuid,
-      </if>
-      <if test="floor != null">
-        `floor`,
-      </if>
-      <if test="ex != null">
-        ex,
-      </if>
-      <if test="time != null">
-        `time`,
-      </if>
-      <if test="comment != null">
-        `comment`,
-      </if>
-    </trim>
-    values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="contentId != null">
-        #{contentId,jdbcType=BIGINT},
-      </if>
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="floor != null">
-        #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="ex != null">
-        #{ex,jdbcType=BIGINT},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="comment != null">
-        #{comment,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=BIGINT},
-      </if>
-      <if test="contentId != null">
-        content_id = #{contentId,jdbcType=BIGINT},
-      </if>
-      <if test="uuid != null">
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="floor != null">
+        values (#{contentId,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER},
+        #{ex,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{comment,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.poindre.shua.post.comment.ContentComment" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contentId != null">
+                content_id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="floor != null">
+                `floor`,
+            </if>
+            <if test="ex != null">
+                ex,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+            <if test="comment != null">
+                `comment`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contentId != null">
+                #{contentId,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="floor != null">
+                #{floor,jdbcType=INTEGER},
+            </if>
+            <if test="ex != null">
+                #{ex,jdbcType=BIGINT},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.post.comment.ContentComment">
+        <!--@mbg.generated-->
+        update content_comment
+        <set>
+            <if test="contentId != null">
+                content_id = #{contentId,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="floor != null">
+                `floor` = #{floor,jdbcType=INTEGER},
+            </if>
+            <if test="ex != null">
+                ex = #{ex,jdbcType=BIGINT},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comment != null">
+                `comment` = #{comment,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.post.comment.ContentComment">
+        <!--@mbg.generated-->
+        update content_comment
+        set content_id = #{contentId,jdbcType=BIGINT},
+        uid = #{uid,jdbcType=VARCHAR},
         `floor` = #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="ex != null">
         ex = #{ex,jdbcType=BIGINT},
-      </if>
-      <if test="time != null">
         `time` = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="comment != null">
-        `comment` = #{comment,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="getCommentFloor" parameterType="Integer" resultType="Integer">
-    select floor from content_comment where content_id = #{id, jdbcType=INTEGER} order by floor desc limit 1
-  </select>
+        `comment` = #{comment,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update content_comment
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="content_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.contentId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="uid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.uid,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="`floor` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.floor,jdbcType=INTEGER}
+                </foreach>
+            </trim>
+            <trim prefix="ex = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.ex,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.time,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="`comment` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.comment,jdbcType=LONGVARCHAR}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update content_comment
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="content_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.contentId != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.contentId,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="uid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.uid != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.uid,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`floor` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.floor != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.floor,jdbcType=INTEGER}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="ex = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.ex != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.ex,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.time != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.time,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`comment` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.comment != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.comment,jdbcType=LONGVARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content_comment
+        (content_id, uid, `floor`, ex, `time`, `comment`)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.contentId,jdbcType=BIGINT}, #{item.uid,jdbcType=VARCHAR}, #{item.floor,jdbcType=INTEGER},
+            #{item.ex,jdbcType=BIGINT}, #{item.time,jdbcType=TIMESTAMP}, #{item.comment,jdbcType=LONGVARCHAR}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
+            parameterType="com.poindre.shua.post.comment.ContentComment" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            content_id,
+            uid,
+            `floor`,
+            ex,
+            `time`,
+            `comment`,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            #{contentId,jdbcType=BIGINT},
+            #{uid,jdbcType=VARCHAR},
+            #{floor,jdbcType=INTEGER},
+            #{ex,jdbcType=BIGINT},
+            #{time,jdbcType=TIMESTAMP},
+            #{comment,jdbcType=LONGVARCHAR},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            content_id = #{contentId,jdbcType=BIGINT},
+            uid = #{uid,jdbcType=VARCHAR},
+            `floor` = #{floor,jdbcType=INTEGER},
+            ex = #{ex,jdbcType=BIGINT},
+            `time` = #{time,jdbcType=TIMESTAMP},
+            `comment` = #{comment,jdbcType=LONGVARCHAR},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.poindre.shua.post.comment.ContentComment" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into content_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="contentId != null">
+                content_id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="floor != null">
+                `floor`,
+            </if>
+            <if test="ex != null">
+                ex,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+            <if test="comment != null">
+                `comment`,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="contentId != null">
+                #{contentId,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="floor != null">
+                #{floor,jdbcType=INTEGER},
+            </if>
+            <if test="ex != null">
+                #{ex,jdbcType=BIGINT},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="contentId != null">
+                content_id = #{contentId,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="floor != null">
+                `floor` = #{floor,jdbcType=INTEGER},
+            </if>
+            <if test="ex != null">
+                ex = #{ex,jdbcType=BIGINT},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comment != null">
+                `comment` = #{comment,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="getCommentFloor" parameterType="Integer" resultType="Integer">
+        select floor from content_comment where content_id = #{id, jdbcType=INTEGER} order by floor desc limit 1
+    </select>
+    <select id="getCommentNum" parameterType="Integer" resultType="Integer">
+        select count(*) from content_comment where content_id = #{id, jdbcType=INTEGER}
+    </select>
+    <select id="getComment" resultMap="CompoundCommentMap">
+        select
+            comment.id as comment_id,
+            comment.content_id as comment_content_id,
+            comment.uid as comment_uid,
+            comment.floor as comment_floor,
+            comment.time as comment_time,
+            comment.comment as comment_comment,
+                subcomment.id as subcomment_id,
+                subcomment.content_id as subcomment_content_id,
+                subcomment.uid as subcomment_uid,
+                subcomment.floor as subcomment_floor,
+                subcomment.time as subcomment_time,
+                subcomment.comment as subcomment_comment
+        from content_comment comment
+        left join content_comment subcomment on subcomment.ex = comment.id
+        where comment.content_id = #{id,jdbcType=BIGINT} and comment.ex = 0 order by comment.floor
+    </select>
 </mapper>

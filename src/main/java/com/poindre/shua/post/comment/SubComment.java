@@ -1,13 +1,14 @@
 package com.poindre.shua.post.comment;
 
-import java.util.Date;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
     * 适用于存储用户的评论
     */
 @Data
-public class ContentComment {
+public class SubComment {
     /**
     * 适用于评论的标识符
     */
@@ -27,11 +28,6 @@ public class ContentComment {
     * 适用于评论序列号
     */
     private Integer floor;
-
-    /**
-    * 适用于评论的父评论
-    */
-    private Long ex;
 
     /**
     * 适用于发布评论的时间

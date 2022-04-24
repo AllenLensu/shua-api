@@ -74,4 +74,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         return userAccountMapper.selectByUuid(uuid);
     }
 
+    @Override
+    public String findAvatar(String uuid) {
+        return userAccountMapper.findAvatar(uuid);
+    }
+
 }

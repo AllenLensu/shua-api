@@ -30,4 +30,6 @@ public interface UserAccountService{
 
     UserAccount selectByUuid(String uuid);
 
+    String findAvatar(String uuid);
+
 }

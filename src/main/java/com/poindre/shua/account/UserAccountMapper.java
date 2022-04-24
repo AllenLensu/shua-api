@@ -66,4 +66,6 @@ public interface UserAccountMapper {
     int batchInsert(@Param("list") List<UserAccount> list);
 
     UserAccount selectByUuid(String uuid);
+
+    String findAvatar(String uuid);
 }

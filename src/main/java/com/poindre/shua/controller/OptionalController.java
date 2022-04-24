@@ -1,6 +1,7 @@
 package com.poindre.shua.controller;
 
 import com.poindre.shua.handler.Response;
+import com.poindre.shua.post.comment.ContentCommentService;
 import com.poindre.shua.post.favor.ContentFavor;
 import com.poindre.shua.post.favor.ContentFavorService;
 import com.poindre.shua.post.thumb.ContentThumb;

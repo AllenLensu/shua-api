@@ -1,5 +1,6 @@
 package com.poindre.shua.controller;
 
+import com.poindre.shua.account.UserAccountService;
 import com.poindre.shua.handler.Response;
 import com.poindre.shua.post.Content;
 import com.poindre.shua.post.ContentService;
@@ -43,6 +44,8 @@ public class PostController {
     private UserStarService userStarService;
     @Resource
     private ContentCommentService contentCommentService;
+    @Resource
+    private UserAccountService userAccountService;
 
     @GetMapping("global")
     public List<DetailContent> getGlobalPosts() {
@@ -113,6 +116,7 @@ public class PostController {
     }
 
     @RequestMapping("/star")
+    @PreAuthorize("isAuthenticated()")
     public Response<Object> star(@AuthenticationPrincipal UserDetails currentUser) {
         var currentUserUsername = currentUser.getUsername();
         var uuid = userService.getUuid(currentUserUsername);
@@ -124,22 +128,48 @@ public class PostController {
         return Response.of(true, starPost);
     }
 
-    @RequestMapping("/comment")
-    public Response<Object> comment(@AuthenticationPrincipal UserDetails currentUser, RequestCreateCommentForm requestCreateCommentForm) {
+    @RequestMapping("/getComment/{getComment}")
+    public Response<Object> getPostComment(@PathVariable String getComment) {
+        return Response.of(true, contentCommentService.getComment(Integer.valueOf(getComment)));
+    }
+
+    @RequestMapping("/getCommentNum/{getCommentNum}")
+    public Response<Object> getPostCommentNum(@PathVariable String getCommentNum) {
+        return Response.of(true, contentCommentService.getCommentNum(Integer.valueOf(getCommentNum)));
+    }
+
+    @RequestMapping("/addComment")
+    @PreAuthorize("isAuthenticated()")
+    public Response<Object> addComment(
+            @AuthenticationPrincipal UserDetails currentUser,
+            RequestCreateCommentForm requestCreateCommentForm
+    ) {
         var currentUserUsername = currentUser.getUsername();
-        var uuid = userService.getUuid(currentUserUsername);
-        var floor = contentCommentService.getCommentFloor(requestCreateCommentForm.post_id);
+        Integer floor = contentCommentService.getCommentFloor(requestCreateCommentForm.post_id);
         ContentComment contentComment = new ContentComment();
         contentComment.setComment(requestCreateCommentForm.getComment());
-        contentComment.setUuid(uuid);
-        if (requestCreateCommentForm.getComment_id_ex()!=null) {
+        contentComment.setUid(currentUserUsername);
+        if (requestCreateCommentForm.getComment_id_ex() != null) {
             contentComment.setEx(requestCreateCommentForm.getComment_id_ex());
+        }
+        if (floor == null) {
+            floor = 0;
         }
         contentComment.setFloor(floor + 1);
         contentComment.setTime(new Date());
         contentComment.setContentId(requestCreateCommentForm.getPost_id().longValue());
         contentCommentService.insert(contentComment);
         return Response.of(true, null);
+    }
+
+    @RequestMapping("/detail/{id}")
+    public Response<DetailContent> detailContent(@PathVariable int id) {
+        return Response.of(true, contentService.findById(id));
+    }
+
+    @RequestMapping("/{uid}/avatar")
+    public Response<String> getAvatar(@PathVariable String uid) {
+        return Response.of(true, userAccountService.findAvatar(userService.getUuid(uid)));
     }
 
     @Data

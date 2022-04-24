@@ -68,8 +68,18 @@ public class ContentCommentServiceImpl implements ContentCommentService{
     }
 
     @Override
-    public int getCommentFloor(Integer id) {
+    public Integer getCommentFloor(Integer id) {
         return contentCommentMapper.getCommentFloor(id);
+    }
+
+    @Override
+    public List<Comment> getComment(Integer id) {
+        return contentCommentMapper.getComment(id);
+    }
+
+    @Override
+    public int getCommentNum(Integer id) {
+        return contentCommentMapper.getCommentNum(id);
     }
 
 }

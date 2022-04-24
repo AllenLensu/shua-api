@@ -67,4 +67,9 @@ class ShuaApplicationTests {
         System.out.println(contentService.findTypePosts(2));
     }
 
+    @Test
+    void updateHotTest() {
+
+    }
+
 }

@@ -65,5 +65,9 @@ public interface ContentCommentMapper {
 
     int batchInsert(@Param("list") List<ContentComment> list);
 
-    int getCommentFloor(Integer id);
+    Integer getCommentFloor(Integer id);
+
+    List<Comment> getComment(Integer id);
+
+    int getCommentNum(Integer id);
 }

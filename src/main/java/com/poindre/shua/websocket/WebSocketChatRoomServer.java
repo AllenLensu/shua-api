@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @ServerEndpoint("/chat")
-public class WebSocketChatServer {
+public class WebSocketChatRoomServer {
 
     /**
      * 全部在线会话

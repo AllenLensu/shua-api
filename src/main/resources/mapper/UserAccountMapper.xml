@@ -230,4 +230,8 @@
   <select id="selectByUuid" resultType="com.poindre.shua.account.UserAccount">
     select * from user_account where uuid = #{uuid, jdbcType=VARCHAR} limit 1
   </select>
+
+  <select id="findAvatar" resultType="String" parameterType="String">
+    select avatar from user_account where uuid = #{uuid, jdbcType=VARCHAR} limit 1
+  </select>
 </mapper>

@@ -16,7 +16,6 @@
         <id column="contentId" jdbcType="BIGINT" property="contentid"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="uid" jdbcType="VARCHAR" property="uid"/>
-        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
         <result column="signature" jdbcType="VARCHAR" property="signature"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
     </resultMap>
@@ -26,16 +25,16 @@
     </sql>
 
     <select id="findAllPosts" resultMap="PostContentMap">
-        select contentId, content.uuid, content, u.uid, i.signature, sendTime, avatar
+        select contentId, content, u.uid, i.signature, sendTime, avatar
         from content
                  join user u on content.uuid = u.uuid
-                 join user_info i on u.uuid = i.id
-                 join user_account a on a.uuid = u.uuid
+                 join user_info i on content.uuid = i.id
+                 join user_account a on a.uuid = content.uuid
         order by sendTime desc
     </select>
 
     <select id="findTypePosts" resultMap="PostContentMap">
-        select contentId, content.uuid, content, u.uid, i.signature, sendTime, avatar
+        select contentId, content, u.uid, i.signature, sendTime, avatar
         from content
         join user u on content.uuid = u.uuid
         join user_info i on u.uuid = i.id
@@ -50,13 +49,12 @@
         #{sendTime,jdbcType=TIMESTAMP})
     </insert>
 
-    <select id="findById" resultMap="PostContentMap">
-        select contentId, content.uuid, content, u.uid, i.signature, sendTime, avatar
+    <select id="findById" resultType="com.poindre.shua.post.DetailContent">
+        select contentId, content, u.uid, i.signature, sendTime, avatar
         from content
         join user u on content.uuid = u.uuid
         join user_info i on u.uuid = i.id
         join user_account a on a.uuid = u.uuid
-        where content.contentId = #{id, jdbcType=INTEGER}
-        order by sendTime desc limit 1
+        where content.contentId = #{id, jdbcType=INTEGER} limit 1
     </select>
 </mapper>

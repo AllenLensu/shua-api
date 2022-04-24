@@ -27,6 +27,10 @@ public interface ContentCommentService{
 
     int batchInsert(List<ContentComment> list);
 
-    int getCommentFloor(Integer id);
+    Integer getCommentFloor(Integer id);
+
+    List<Comment> getComment(Integer id);
+
+    int getCommentNum(Integer id);
 
 }

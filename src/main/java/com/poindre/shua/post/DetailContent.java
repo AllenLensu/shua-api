@@ -2,7 +2,7 @@ package com.poindre.shua.post;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class DetailContent {
@@ -12,11 +12,9 @@ public class DetailContent {
 
     private String uid;
 
-    private String uuid;
-
     private String signature;
 
-    private LocalDateTime sendTime;
+    private Date sendTime;
 
     private String avatar;
 }
