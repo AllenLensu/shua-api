@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @ServerEndpoint("/chat")
-public class WebSocketChatRoomServer {
+public class WebSocketServer {
 
     /**
      * 全部在线会话
@@ -32,7 +32,7 @@ public class WebSocketChatRoomServer {
     @OnOpen
     public void onOpen(Session session) {
         onlineSessions.put(session.getId(), session);
-        sendMessageToAll(Message.jsonStr(Message.ENTER, "", "", onlineSessions.size()));
+        sendMessageToAll(ChatMes.jsonStr(ChatMes.ENTER, "", "", onlineSessions.size()));
     }
 
     /**
@@ -40,8 +40,8 @@ public class WebSocketChatRoomServer {
      */
     @OnMessage
     public void onMessage(Session session, String jsonStr) {
-        Message message = JSON.parseObject(jsonStr, Message.class);
-        sendMessageToAll(Message.jsonStr(Message.SPEAK, message.getUsername(), message.getMsg(), onlineSessions.size()));
+        ChatMes chatMes = JSON.parseObject(jsonStr, ChatMes.class);
+        sendMessageToAll(ChatMes.jsonStr(ChatMes.SPEAK, chatMes.getUsername(), chatMes.getMsg(), onlineSessions.size()));
     }
 
     /**
@@ -50,7 +50,7 @@ public class WebSocketChatRoomServer {
     @OnClose
     public void onClose(Session session) {
         onlineSessions.remove(session.getId());
-        sendMessageToAll(Message.jsonStr(Message.QUIT, "", "", onlineSessions.size()));
+        sendMessageToAll(ChatMes.jsonStr(ChatMes.QUIT, "", "", onlineSessions.size()));
     }
 
     /**
