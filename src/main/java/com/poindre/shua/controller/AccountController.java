@@ -4,9 +4,12 @@ import com.poindre.shua.account.UserAccountService;
 import com.poindre.shua.account.info.UserAccountInfo;
 import com.poindre.shua.account.info.UserAccountInfoService;
 import com.poindre.shua.handler.Response;
+import com.poindre.shua.user.User;
+import com.poindre.shua.user.info.UserInfo;
 import com.poindre.shua.user.info.UserInfoService;
 import com.poindre.shua.user.UserService;
 import com.poindre.shua.user.role.UserRoleService;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @RestController
 @RequestMapping(value = "account")
@@ -42,7 +46,7 @@ public class AccountController {
     public Response<UsernameWithAvatar> hasLoginVerify(@AuthenticationPrincipal UserDetails userDetails) {
         var username = userDetails.getUsername();
         var uuid = userService.getUuid(username);
-        var avatar = "/avatar/" + userAccountService.selectByUuid(uuid).getAvatar();
+        var avatar = userAccountService.selectByUuid(uuid).getAvatar();
         var role = userRoleService.selectByUuid(uuid);
         return Response.of(true, new UsernameWithAvatar(username, avatar, Integer.valueOf(role.getRoleId())));
     }
@@ -52,6 +56,23 @@ public class AccountController {
         var username = userDetails.getUsername();
         UserAccountInfo userAccountInfo = userAccountInfoService.selectByUuid(userService.getUuid(username));
         return Response.of(true, userAccountInfo);
+    }
+
+    @RequestMapping("changeProfile")
+    public Response<UserInfo> changeProfile(Profile profile,@AuthenticationPrincipal UserDetails userDetails) {
+        var username = userDetails.getUsername();
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(userService.getUuid(username));
+        userInfo.setName(profile.getName());
+        userInfo.setGender(profile.getGender());
+        userInfo.setAge(profile.getAge());
+        userInfo.setBirthday(profile.getBirthday());
+        userInfo.setResident(profile.getResident());
+        userInfo.setHousehold(profile.getHousehold());
+        userInfo.setSignature(profile.getSignature());
+        userInfo.setIntroduction(profile.getIntroduction());
+        userInfoService.updateProfile(userInfo);
+        return Response.of(true, null);
     }
 
     @Data
@@ -65,5 +86,18 @@ public class AccountController {
             setUsername(username);
             setAccountRole(role);
         }
+    }
+
+    @Data
+    static class Profile {
+        private Short age;
+        private Date birthday;
+        private Short gender;
+        private String household;
+        private String introduction;
+        private String name;
+        private String resident;
+        private String signature;
+        private String uuid;
     }
 }

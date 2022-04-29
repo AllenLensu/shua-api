@@ -1,19 +1,19 @@
-package com.poindre.shua.user.info;
+package com.poindre.shua.banner;
 
+import com.poindre.shua.banner.Banner;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 @Mapper
-public interface UserInfoMapper {
+public interface BannerMapper {
     /**
      * delete by primary key
      *
      * @param id primaryKey
      * @return deleteCount
      */
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     /**
      * insert record to table
@@ -21,11 +21,11 @@ public interface UserInfoMapper {
      * @param record the record
      * @return insert count
      */
-    int insert(UserInfo record);
+    int insert(Banner record);
 
-    int insertOrUpdate(UserInfo record);
+    int insertOrUpdate(Banner record);
 
-    int insertOrUpdateSelective(UserInfo record);
+    int insertOrUpdateSelective(Banner record);
 
     /**
      * insert record to table selective
@@ -33,7 +33,7 @@ public interface UserInfoMapper {
      * @param record the record
      * @return insert count
      */
-    int insertSelective(UserInfo record);
+    int insertSelective(Banner record);
 
     /**
      * select by primary key
@@ -41,7 +41,7 @@ public interface UserInfoMapper {
      * @param id primary key
      * @return object by primary key
      */
-    UserInfo selectByPrimaryKey(String id);
+    Banner selectByPrimaryKey(Integer id);
 
     /**
      * update record selective
@@ -49,7 +49,7 @@ public interface UserInfoMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(UserInfo record);
+    int updateByPrimaryKeySelective(Banner record);
 
     /**
      * update record
@@ -57,17 +57,13 @@ public interface UserInfoMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(UserInfo record);
+    int updateByPrimaryKey(Banner record);
 
-    int updateBatch(List<UserInfo> list);
+    int updateBatch(List<Banner> list);
 
-    int updateBatchSelective(List<UserInfo> list);
+    int updateBatchSelective(List<Banner> list);
 
-    int batchInsert(@Param("list") List<UserInfo> list);
+    int batchInsert(@Param("list") List<Banner> list);
 
-    PersonalUserInfo selectByUuid(String id);
-
-    List<UserInfo> findAllUser();
-
-    int updateProfile(UserInfo userInfo);
+    List<Banner> selectAll();
 }

@@ -75,4 +75,9 @@ public class UserInfoServiceImpl implements UserInfoService{
         return userInfoMapper.findAllUser();
     }
 
+    @Override
+    public int updateProfile(UserInfo userInfo) {
+        return userInfoMapper.updateProfile(userInfo);
+    }
+
 }

@@ -1,410 +1,434 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poindre.shua.user.info.UserInfoMapper">
-  <resultMap id="BaseResultMap" type="com.poindre.shua.user.info.UserInfo">
-    <!--@mbg.generated-->
-    <!--@Table user_info-->
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="gender" jdbcType="SMALLINT" property="gender" />
-    <result column="age" jdbcType="SMALLINT" property="age" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
-    <result column="resident" jdbcType="VARCHAR" property="resident" />
-    <result column="household" jdbcType="VARCHAR" property="household" />
-    <result column="signature" jdbcType="VARCHAR" property="signature" />
-    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
-  </resultMap>
-  <resultMap id="UserInfoMap" type="com.poindre.shua.user.info.PersonalUserInfo">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="uid" jdbcType="VARCHAR" property="username" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="gender" jdbcType="SMALLINT" property="gender" />
-    <result column="age" jdbcType="SMALLINT" property="age" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
-    <result column="resident" jdbcType="VARCHAR" property="resident" />
-    <result column="household" jdbcType="VARCHAR" property="household" />
-    <result column="signature" jdbcType="VARCHAR" property="signature" />
-    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, `name`, gender, age, birthday, resident, household, signature, introduction
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from user_info
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    <!--@mbg.generated-->
-    delete from user_info
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.poindre.shua.user.info.UserInfo">
-    <!--@mbg.generated-->
-    insert into user_info (id, `name`, gender, 
-      age, birthday, resident, 
-      household, signature, introduction
-      )
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=SMALLINT}, 
-      #{age,jdbcType=SMALLINT}, #{birthday,jdbcType=DATE}, #{resident,jdbcType=VARCHAR}, 
-      #{household,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.poindre.shua.user.info.UserInfo">
-    <!--@mbg.generated-->
-    insert into user_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="resident != null">
-        resident,
-      </if>
-      <if test="household != null">
-        household,
-      </if>
-      <if test="signature != null">
-        signature,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=SMALLINT},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=SMALLINT},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=DATE},
-      </if>
-      <if test="resident != null">
-        #{resident,jdbcType=VARCHAR},
-      </if>
-      <if test="household != null">
-        #{household,jdbcType=VARCHAR},
-      </if>
-      <if test="signature != null">
-        #{signature,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.user.info.UserInfo">
-    <!--@mbg.generated-->
-    update user_info
-    <set>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=SMALLINT},
-      </if>
-      <if test="age != null">
-        age = #{age,jdbcType=SMALLINT},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=DATE},
-      </if>
-      <if test="resident != null">
-        resident = #{resident,jdbcType=VARCHAR},
-      </if>
-      <if test="household != null">
-        household = #{household,jdbcType=VARCHAR},
-      </if>
-      <if test="signature != null">
-        signature = #{signature,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.user.info.UserInfo">
-    <!--@mbg.generated-->
-    update user_info
-    set `name` = #{name,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=SMALLINT},
-      age = #{age,jdbcType=SMALLINT},
-      birthday = #{birthday,jdbcType=DATE},
-      resident = #{resident,jdbcType=VARCHAR},
-      household = #{household,jdbcType=VARCHAR},
-      signature = #{signature,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update user_info
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`name` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.name,jdbcType=VARCHAR}
+    <resultMap id="BaseResultMap" type="com.poindre.shua.user.info.UserInfo">
+        <!--@mbg.generated-->
+        <!--@Table user_info-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="gender" jdbcType="SMALLINT" property="gender"/>
+        <result column="age" jdbcType="SMALLINT" property="age"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="resident" jdbcType="VARCHAR" property="resident"/>
+        <result column="household" jdbcType="VARCHAR" property="household"/>
+        <result column="signature" jdbcType="VARCHAR" property="signature"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+    </resultMap>
+    <resultMap id="UserInfoMap" type="com.poindre.shua.user.info.PersonalUserInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="uid" jdbcType="VARCHAR" property="username"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="gender" jdbcType="SMALLINT" property="gender"/>
+        <result column="age" jdbcType="SMALLINT" property="age"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="resident" jdbcType="VARCHAR" property="resident"/>
+        <result column="household" jdbcType="VARCHAR" property="household"/>
+        <result column="signature" jdbcType="VARCHAR" property="signature"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `name`, gender, age, birthday, resident, household, signature, introduction
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete
+        from user_info
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.poindre.shua.user.info.UserInfo">
+        <!--@mbg.generated-->
+        insert into user_info (id, `name`, gender,
+                               age, birthday, resident,
+                               household, signature, introduction)
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=SMALLINT},
+                #{age,jdbcType=SMALLINT}, #{birthday,jdbcType=DATE}, #{resident,jdbcType=VARCHAR},
+                #{household,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.poindre.shua.user.info.UserInfo">
+        <!--@mbg.generated-->
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="resident != null">
+                resident,
+            </if>
+            <if test="household != null">
+                household,
+            </if>
+            <if test="signature != null">
+                signature,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=SMALLINT},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=SMALLINT},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="resident != null">
+                #{resident,jdbcType=VARCHAR},
+            </if>
+            <if test="household != null">
+                #{household,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.user.info.UserInfo">
+        <!--@mbg.generated-->
+        update user_info
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=SMALLINT},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=SMALLINT},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="resident != null">
+                resident = #{resident,jdbcType=VARCHAR},
+            </if>
+            <if test="household != null">
+                household = #{household,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                signature = #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.user.info.UserInfo">
+        <!--@mbg.generated-->
+        update user_info
+        set `name`       = #{name,jdbcType=VARCHAR},
+            gender       = #{gender,jdbcType=SMALLINT},
+            age          = #{age,jdbcType=SMALLINT},
+            birthday     = #{birthday,jdbcType=DATE},
+            resident     = #{resident,jdbcType=VARCHAR},
+            household    = #{household,jdbcType=VARCHAR},
+            signature    = #{signature,jdbcType=VARCHAR},
+            introduction = #{introduction,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update user_info
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="`name` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=VARCHAR} then #{item.name,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="gender = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=VARCHAR} then #{item.gender,jdbcType=SMALLINT}
+                </foreach>
+            </trim>
+            <trim prefix="age = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=VARCHAR} then #{item.age,jdbcType=SMALLINT}
+                </foreach>
+            </trim>
+            <trim prefix="birthday = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=VARCHAR} then #{item.birthday,jdbcType=DATE}
+                </foreach>
+            </trim>
+            <trim prefix="resident = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=VARCHAR} then #{item.resident,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="household = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=VARCHAR} then #{item.household,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="signature = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=VARCHAR} then #{item.signature,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="introduction = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=VARCHAR} then #{item.introduction,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=VARCHAR}
         </foreach>
-      </trim>
-      <trim prefix="gender = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.gender,jdbcType=SMALLINT}
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update user_info
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="`name` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.name != null">
+                        when id = #{item.id,jdbcType=VARCHAR} then #{item.name,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="gender = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.gender != null">
+                        when id = #{item.id,jdbcType=VARCHAR} then #{item.gender,jdbcType=SMALLINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="age = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.age != null">
+                        when id = #{item.id,jdbcType=VARCHAR} then #{item.age,jdbcType=SMALLINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="birthday = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.birthday != null">
+                        when id = #{item.id,jdbcType=VARCHAR} then #{item.birthday,jdbcType=DATE}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="resident = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.resident != null">
+                        when id = #{item.id,jdbcType=VARCHAR} then #{item.resident,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="household = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.household != null">
+                        when id = #{item.id,jdbcType=VARCHAR} then #{item.household,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="signature = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.signature != null">
+                        when id = #{item.id,jdbcType=VARCHAR} then #{item.signature,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="introduction = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.introduction != null">
+                        when id = #{item.id,jdbcType=VARCHAR} then #{item.introduction,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=VARCHAR}
         </foreach>
-      </trim>
-      <trim prefix="age = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.age,jdbcType=SMALLINT}
+    </update>
+    <insert id="batchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into user_info
+        (id, `name`, gender, age, birthday, resident, household, signature, introduction)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.gender,jdbcType=SMALLINT},
+             #{item.age,jdbcType=SMALLINT}, #{item.birthday,jdbcType=DATE}, #{item.resident,jdbcType=VARCHAR},
+             #{item.household,jdbcType=VARCHAR}, #{item.signature,jdbcType=VARCHAR},
+             #{item.introduction,jdbcType=VARCHAR})
         </foreach>
-      </trim>
-      <trim prefix="birthday = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.birthday,jdbcType=DATE}
-        </foreach>
-      </trim>
-      <trim prefix="resident = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.resident,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="household = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.household,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="signature = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.signature,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="introduction = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.introduction,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=VARCHAR}
-    </foreach>
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update user_info
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`name` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.name != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.name,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="gender = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.gender != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.gender,jdbcType=SMALLINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="age = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.age != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.age,jdbcType=SMALLINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="birthday = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.birthday != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.birthday,jdbcType=DATE}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="resident = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.resident != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.resident,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="household = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.household != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.household,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="signature = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.signature != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.signature,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="introduction = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.introduction != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.introduction,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=VARCHAR}
-    </foreach>
-  </update>
-  <insert id="batchInsert" parameterType="map">
-    <!--@mbg.generated-->
-    insert into user_info
-    (id, `name`, gender, age, birthday, resident, household, signature, introduction)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.gender,jdbcType=SMALLINT}, 
-        #{item.age,jdbcType=SMALLINT}, #{item.birthday,jdbcType=DATE}, #{item.resident,jdbcType=VARCHAR}, 
-        #{item.household,jdbcType=VARCHAR}, #{item.signature,jdbcType=VARCHAR}, #{item.introduction,jdbcType=VARCHAR}
-        )
-    </foreach>
-  </insert>
-  <insert id="insertOrUpdate" parameterType="com.poindre.shua.user.info.UserInfo">
-    <!--@mbg.generated-->
-    insert into user_info
-    (id, `name`, gender, age, birthday, resident, household, signature, introduction)
-    values
-    (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=SMALLINT}, #{age,jdbcType=SMALLINT}, 
-      #{birthday,jdbcType=DATE}, #{resident,jdbcType=VARCHAR}, #{household,jdbcType=VARCHAR}, 
-      #{signature,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR})
-    on duplicate key update 
-    id = #{id,jdbcType=VARCHAR}, 
-    `name` = #{name,jdbcType=VARCHAR}, 
-    gender = #{gender,jdbcType=SMALLINT}, 
-    age = #{age,jdbcType=SMALLINT}, 
-    birthday = #{birthday,jdbcType=DATE}, 
-    resident = #{resident,jdbcType=VARCHAR}, 
-    household = #{household,jdbcType=VARCHAR}, 
-    signature = #{signature,jdbcType=VARCHAR}, 
-    introduction = #{introduction,jdbcType=VARCHAR}
-  </insert>
-  <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.user.info.UserInfo">
-    <!--@mbg.generated-->
-    insert into user_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        `name`,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="resident != null">
-        resident,
-      </if>
-      <if test="household != null">
-        household,
-      </if>
-      <if test="signature != null">
-        signature,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=SMALLINT},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=SMALLINT},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=DATE},
-      </if>
-      <if test="resident != null">
-        #{resident,jdbcType=VARCHAR},
-      </if>
-      <if test="household != null">
-        #{household,jdbcType=VARCHAR},
-      </if>
-      <if test="signature != null">
-        #{signature,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=VARCHAR},
-      </if>
-    </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=SMALLINT},
-      </if>
-      <if test="age != null">
-        age = #{age,jdbcType=SMALLINT},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=DATE},
-      </if>
-      <if test="resident != null">
-        resident = #{resident,jdbcType=VARCHAR},
-      </if>
-      <if test="household != null">
-        household = #{household,jdbcType=VARCHAR},
-      </if>
-      <if test="signature != null">
-        signature = #{signature,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+    </insert>
+    <insert id="insertOrUpdate" parameterType="com.poindre.shua.user.info.UserInfo">
+        <!--@mbg.generated-->
+        insert into user_info
+        (id, `name`, gender, age, birthday, resident, household, signature, introduction)
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=SMALLINT}, #{age,jdbcType=SMALLINT},
+                #{birthday,jdbcType=DATE}, #{resident,jdbcType=VARCHAR}, #{household,jdbcType=VARCHAR},
+                #{signature,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR})
+        on duplicate key update id           = #{id,jdbcType=VARCHAR},
+                                `name`       = #{name,jdbcType=VARCHAR},
+                                gender       = #{gender,jdbcType=SMALLINT},
+                                age          = #{age,jdbcType=SMALLINT},
+                                birthday     = #{birthday,jdbcType=DATE},
+                                resident     = #{resident,jdbcType=VARCHAR},
+                                household    = #{household,jdbcType=VARCHAR},
+                                signature    = #{signature,jdbcType=VARCHAR},
+                                introduction = #{introduction,jdbcType=VARCHAR}
+    </insert>
+    <insert id="insertOrUpdateSelective" parameterType="com.poindre.shua.user.info.UserInfo">
+        <!--@mbg.generated-->
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="resident != null">
+                resident,
+            </if>
+            <if test="household != null">
+                household,
+            </if>
+            <if test="signature != null">
+                signature,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=SMALLINT},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=SMALLINT},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="resident != null">
+                #{resident,jdbcType=VARCHAR},
+            </if>
+            <if test="household != null">
+                #{household,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=SMALLINT},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=SMALLINT},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="resident != null">
+                resident = #{resident,jdbcType=VARCHAR},
+            </if>
+            <if test="household != null">
+                household = #{household,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                signature = #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 
-  <select id="selectByUuid" parameterType="java.lang.String" resultMap="UserInfoMap">
-    select user_info.id as id, uid, name, gender, age, birthday, resident, household, signature, introduction from user_info join user where user.uuid = user_info.id and user_info.id = #{id,jdbcType=VARCHAR}
-  </select>
+    <select id="selectByUuid" parameterType="java.lang.String" resultMap="UserInfoMap">
+        select user_info.id as id,
+               uid,
+               name,
+               gender,
+               age,
+               birthday,
+               resident,
+               household,
+               signature,
+               introduction
+        from user_info
+                 join user
+        where user.uuid = user_info.id
+          and user_info.id = #{id,jdbcType=VARCHAR}
+    </select>
 
-  <select id="findAllUser" resultMap="BaseResultMap">
-    select * from user_info
-  </select>
+    <select id="findAllUser" resultMap="BaseResultMap">
+        select *
+        from user_info
+    </select>
+
+    <update id="updateProfile" parameterType="com.poindre.shua.user.info.UserInfo">
+        update user_info
+        set name=#{name,jdbcType=VARCHAR},
+            gender=#{gender,jdbcType=SMALLINT},
+            age=#{age,jdbcType=SMALLINT},
+            birthday=#{birthday,jdbcType=DATE},
+            resident=#{resident,jdbcType=VARCHAR},
+            household=#{household,jdbcType=VARCHAR},
+            signature=#{signature,jdbcType=VARCHAR},
+            introduction=#{introduction,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

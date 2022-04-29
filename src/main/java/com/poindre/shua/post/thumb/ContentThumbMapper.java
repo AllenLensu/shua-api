@@ -32,4 +32,8 @@ public interface ContentThumbMapper {
     int deleteByCompundKey(ContentThumb contentThumb);
 
     int selectByCompundKey(ContentThumb contentThumb);
+
+    int getThumbNum(int id);
+
+    int deleteByPostId(Long id);
 }

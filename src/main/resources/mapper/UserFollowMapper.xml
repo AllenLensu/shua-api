@@ -188,4 +188,30 @@
     <select id="selectByCompundKey" parameterType="com.poindre.shua.user.follow.UserFollow" resultType="Integer">
         select count(*) from user_follow where uuid=#{uuid,jdbcType=VARCHAR} and followed_uuid=#{followedUuid,jdbcType=VARCHAR}
     </select>
+
+    <select id="getFollowNum" parameterType="String" resultType="Integer">
+        select count(*)
+        from user_follow
+        where user_follow.uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getTodayFollowNum" parameterType="String" resultType="Integer">
+        select count(*)
+        from user_follow
+        where user_follow.uuid = #{uuid,jdbcType=VARCHAR}
+        and user_follow.time > now() - 86400
+    </select>
+
+    <select id="getFollowedNum" parameterType="String" resultType="Integer">
+        select count(*)
+        from user_follow
+        where user_follow.followed_uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getTodayFollowedNum" parameterType="String" resultType="Integer">
+        select count(*)
+        from user_follow
+        where user_follow.followed_uuid = #{uuid,jdbcType=VARCHAR}
+        and user_follow.time > now() - 86400
+    </select>
 </mapper>

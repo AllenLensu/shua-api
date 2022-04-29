@@ -112,4 +112,12 @@
   <select id="selectByCompundKey" parameterType="com.poindre.shua.post.thumb.ContentThumb" resultType="Integer">
     select count(*) from content_thumb where uuid=#{uuid,jdbcType=VARCHAR} and content_id=#{contentId,jdbcType=BIGINT}
   </select>
+
+  <select id="getThumbNum" parameterType="Integer" resultType="Integer">
+    select count(*) from content_thumb where content_id = #{id, jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPostId" parameterType="Long">
+    delete from content_thumb where content_id = #{id,jdbcType=BIGINT}
+  </delete>
 </mapper>

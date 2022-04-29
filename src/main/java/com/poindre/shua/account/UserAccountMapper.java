@@ -68,4 +68,6 @@ public interface UserAccountMapper {
     UserAccount selectByUuid(String uuid);
 
     String findAvatar(String uuid);
+
+    int updateAvatar(Avatar avatar);
 }

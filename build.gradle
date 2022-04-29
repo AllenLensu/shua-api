@@ -19,13 +19,17 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.alibaba:fastjson:1.2.80'
-    implementation 'org.projectlombok:lombok:1.18.22'
+    implementation 'com.alibaba:fastjson:2.0.1'
+    implementation 'org.projectlombok:lombok:1.18.24'
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    implementation 'org.jetbrains:annotations:20.1.0'
+
+//    implementation 'org.springframework.boot:spring-boot-starter-tomcat:2.6.7'
+//    implementation 'org.apache.tomcat.embed:tomcat-embed-websocket:10.0.20'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

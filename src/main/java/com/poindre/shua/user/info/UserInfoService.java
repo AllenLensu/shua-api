@@ -28,4 +28,6 @@ public interface UserInfoService{
     int batchInsert(List<UserInfo> list);
 
     List<UserInfo> findAllUser();
+
+    int updateProfile(UserInfo userInfo);
 }

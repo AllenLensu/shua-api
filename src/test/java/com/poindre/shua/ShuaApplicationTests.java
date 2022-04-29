@@ -3,15 +3,17 @@ package com.poindre.shua;
 import com.poindre.shua.account.UserAccount;
 import com.poindre.shua.account.UserAccountService;
 import com.poindre.shua.post.ContentService;
-import com.poindre.shua.tag.TypeService;
-import com.poindre.shua.user.UserService;
+import com.poindre.shua.post.DetailContent;
 import com.poindre.shua.user.info.UserInfoService;
+import com.poindre.shua.util.SocialRecommend;
+import com.poindre.shua.util.SocialRecommendUtils;
+import lombok.extern.java.Log;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import lombok.extern.java.Log;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @SpringBootTest
 @Log
@@ -21,11 +23,9 @@ class ShuaApplicationTests {
     @Resource
     private UserInfoService userInfoService;
     @Resource
-    private TypeService typeService;
-    @Resource
     private ContentService contentService;
     @Resource
-    private UserService userService;
+    private SocialRecommendUtils socialRecommendUtils;
 
     @Test
     void contextLoads() {
@@ -69,7 +69,15 @@ class ShuaApplicationTests {
 
     @Test
     void updateHotTest() {
-
+        List<DetailContent> contentList = contentService.findAllPosts();
+        for (DetailContent t : contentList
+        ) {
+            socialRecommendUtils.handler(t.getContentid());
+        }
     }
 
+    @Test
+    void hotTest() {
+            socialRecommendUtils.handler(3);
+    }
 }

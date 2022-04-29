@@ -82,4 +82,14 @@ public class ContentCommentServiceImpl implements ContentCommentService{
         return contentCommentMapper.getCommentNum(id);
     }
 
+    @Override
+    public List<HistoryComment> getCommentHistory(String uid) {
+        return contentCommentMapper.getCommentHistory(uid);
+    }
+
+    @Override
+    public int deleteByPostId(Long id) {
+        return contentCommentMapper.deleteByPostId(id);
+    }
+
 }

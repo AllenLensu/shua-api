@@ -31,4 +31,8 @@ public interface ContentFavorService{
 
     int selectByCompundKey(ContentFavor contentFavor);
 
+    int getFavorNum(int id);
+
+    int deleteByPostId(Long id);
+
 }

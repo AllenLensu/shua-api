@@ -68,4 +68,12 @@ public interface UserFollowMapper {
     int deleteByCompundKey(UserFollow userFollow);
 
     int selectByCompundKey(UserFollow userFollow);
+
+    int getFollowNum(String uuid);
+
+    int getTodayFollowNum(String uuid);
+
+    int getFollowedNum(String uuid);
+
+    int getTodayFollowedNum(String uuid);
 }

@@ -77,4 +77,14 @@ public class ContentFavorServiceImpl implements ContentFavorService{
         return contentFavorMapper.selectByCompundKey(contentFavor);
     }
 
+    @Override
+    public int getFavorNum(int id) {
+        return contentFavorMapper.getFavorNum(id);
+    }
+
+    @Override
+    public int deleteByPostId(Long id) {
+        return contentFavorMapper.deleteByPostId(id);
+    }
+
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.poindre.shua.url.UrlMapper">
+    <select id="findAll" resultType="com.poindre.shua.url.Urls">
+        select * from urls
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="key">
+        insert into urls(content, eigenvalue, link) VALUES (#{content,jdbcType=VARCHAR},#{eigenvalue,jdbcType=VARCHAR},#{link,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="retrieve" resultType="java.lang.String">
+        select content from urls where eigenvalue=#{eigenvalue,jdbcType=VARCHAR}
+    </select>
+
+    <select id="deduplicate" resultType="com.poindre.shua.url.Urls">
+        select * from urls where content=#{content,jdbcType=VARCHAR}
+    </select>
+</mapper>

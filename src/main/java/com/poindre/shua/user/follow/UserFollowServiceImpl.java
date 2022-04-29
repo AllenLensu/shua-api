@@ -77,4 +77,24 @@ public class UserFollowServiceImpl implements UserFollowService{
         return userFollowMapper.selectByCompundKey(userFollow);
     }
 
+    @Override
+    public int getFollowNum(String uuid) {
+        return userFollowMapper.getFollowNum(uuid);
+    }
+
+    @Override
+    public int getTodayFollowNum(String uuid) {
+        return userFollowMapper.getTodayFollowNum(uuid);
+    }
+
+    @Override
+    public int getFollowedNum(String uuid) {
+        return userFollowMapper.getFollowedNum(uuid);
+    }
+
+    @Override
+    public int getTodayFollowedNum(String uuid) {
+        return userFollowMapper.getTodayFollowedNum(uuid);
+    }
+
 }

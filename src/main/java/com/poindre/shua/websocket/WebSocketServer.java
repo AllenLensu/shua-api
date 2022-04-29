@@ -25,6 +25,18 @@ public class WebSocketServer {
      */
     private static Map<String, Session> onlineSessions = new ConcurrentHashMap<>();
 
+    /**
+     * 公共方法：发送信息给所有人
+     */
+    private static void sendMessageToAll(String msg) {
+        onlineSessions.forEach((id, session) -> {
+            try {
+                session.getBasicRemote().sendText(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
     /**
      * 当客户端打开连接：1.添加会话对象 2.更新在线人数
@@ -59,19 +71,6 @@ public class WebSocketServer {
     @OnError
     public void onError(Session session, Throwable error) {
         error.printStackTrace();
-    }
-
-    /**
-     * 公共方法：发送信息给所有人
-     */
-    private static void sendMessageToAll(String msg) {
-        onlineSessions.forEach((id, session) -> {
-            try {
-                session.getBasicRemote().sendText(msg);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
 }

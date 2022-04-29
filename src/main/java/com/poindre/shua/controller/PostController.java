@@ -16,6 +16,7 @@ import com.poindre.shua.user.follow.UserFollow;
 import com.poindre.shua.user.follow.UserFollowService;
 import com.poindre.shua.user.star.UserStar;
 import com.poindre.shua.user.star.UserStarService;
+import com.poindre.shua.util.SocialRecommendUtils;
 import lombok.Data;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -46,6 +47,8 @@ public class PostController {
     private ContentCommentService contentCommentService;
     @Resource
     private UserAccountService userAccountService;
+    @Resource
+    private SocialRecommendUtils socialRecommendUtils;
 
     @GetMapping("global")
     public List<DetailContent> getGlobalPosts() {
@@ -57,6 +60,16 @@ public class PostController {
         return contentService.findTypePosts(id);
     }
 
+    @GetMapping("global/time")
+    public List<DetailContent> getGlobalPostsTime() {
+        return contentService.findAllPostsTime();
+    }
+
+    @GetMapping("type/time")
+    public List<DetailContent> getTypePostsTime(int id) {
+        return contentService.findTypePostsTime(id);
+    }
+
     @RequestMapping("id")
     public Response<DetailContent> getIdPosts(@RequestParam("post_id") String id) {
         return Response.of(true, contentService.findById(Integer.parseInt(id)));
@@ -66,13 +79,16 @@ public class PostController {
     @PreAuthorize("isAuthenticated()")
     public Response<Object> addPost(@AuthenticationPrincipal UserDetails userDetails, RequestCreateContentForm contentForm) {
         var username = userDetails.getUsername();
+        var uuid = userService.getUuid(username);
         Content content = new Content();
         content.setContent(contentForm.getPost());
-        content.setUuid(userService.getUuid(username));
+        content.setUuid(uuid);
         content.setType(contentForm.getType());
         content.setType_ex(contentForm.getType_ex());
         content.setSendTime(new Date(contentForm.getSendTime()));
         contentService.insertPost(content);
+        var post_id = contentService.getPostId(uuid);
+        socialRecommendUtils.handler(post_id);
         return Response.of(true, null);
     }
 
@@ -159,6 +175,7 @@ public class PostController {
         contentComment.setTime(new Date());
         contentComment.setContentId(requestCreateCommentForm.getPost_id().longValue());
         contentCommentService.insert(contentComment);
+        socialRecommendUtils.handler(requestCreateCommentForm.getPost_id());
         return Response.of(true, null);
     }
 

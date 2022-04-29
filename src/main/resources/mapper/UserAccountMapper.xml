@@ -1,237 +1,251 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poindre.shua.account.UserAccountMapper">
-  <resultMap id="BaseResultMap" type="com.poindre.shua.account.UserAccount">
-    <!--@mbg.generated-->
-    <!--@Table user_account-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, uuid, `password`, avatar
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from user_account
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from user_account
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.account.UserAccount" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into user_account (uuid, `password`, avatar
-      )
-    values (#{uuid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.account.UserAccount" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into user_account
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        uuid,
-      </if>
-      <if test="password != null">
-        `password`,
-      </if>
-      <if test="avatar != null">
-        avatar,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="avatar != null">
-        #{avatar,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.account.UserAccount">
-    <!--@mbg.generated-->
-    update user_account
-    <set>
-      <if test="uuid != null">
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        `password` = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="avatar != null">
-        avatar = #{avatar,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.poindre.shua.account.UserAccount">
-    <!--@mbg.generated-->
-    update user_account
-    set uuid = #{uuid,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      avatar = #{avatar,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update user_account
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="uuid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+    <resultMap id="BaseResultMap" type="com.poindre.shua.account.UserAccount">
+        <!--@mbg.generated-->
+        <!--@Table user_account-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, uuid, `password`, avatar
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from user_account
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete
+        from user_account
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.account.UserAccount"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user_account (uuid, `password`, avatar)
+        values (#{uuid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.account.UserAccount"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.account.UserAccount">
+        <!--@mbg.generated-->
+        update user_account
+        <set>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.account.UserAccount">
+        <!--@mbg.generated-->
+        update user_account
+        set uuid       = #{uuid,jdbcType=VARCHAR},
+            `password` = #{password,jdbcType=VARCHAR},
+            avatar     = #{avatar,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update user_account
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="`password` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="avatar = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.avatar,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="`password` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update user_account
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.uuid != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`password` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.password != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="avatar = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.avatar != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.avatar,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="avatar = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.avatar,jdbcType=VARCHAR}
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user_account
+            (uuid, `password`, avatar)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.uuid,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.avatar,jdbcType=VARCHAR})
         </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update user_account
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="uuid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.uuid != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.uuid,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="`password` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.password != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="avatar = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.avatar != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.avatar,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into user_account
-    (uuid, `password`, avatar)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.uuid,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, #{item.avatar,jdbcType=VARCHAR}
-        )
-    </foreach>
-  </insert>
-  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.account.UserAccount" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into user_account
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      uuid,
-      `password`,
-      avatar,
-    </trim>
-    values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      #{uuid,jdbcType=VARCHAR},
-      #{password,jdbcType=VARCHAR},
-      #{avatar,jdbcType=VARCHAR},
-    </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=BIGINT},
-      </if>
-      uuid = #{uuid,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      avatar = #{avatar,jdbcType=VARCHAR},
-    </trim>
-  </insert>
-  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.account.UserAccount" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into user_account
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="uuid != null">
-        uuid,
-      </if>
-      <if test="password != null">
-        `password`,
-      </if>
-      <if test="avatar != null">
-        avatar,
-      </if>
-    </trim>
-    values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="avatar != null">
-        #{avatar,jdbcType=VARCHAR},
-      </if>
-    </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=BIGINT},
-      </if>
-      <if test="uuid != null">
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        `password` = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="avatar != null">
-        avatar = #{avatar,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.account.UserAccount"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            uuid,
+            `password`,
+            avatar,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            #{uuid,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR},
+            #{avatar,jdbcType=VARCHAR},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            uuid       = #{uuid,jdbcType=VARCHAR},
+            `password` = #{password,jdbcType=VARCHAR},
+            avatar     = #{avatar,jdbcType=VARCHAR},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.poindre.shua.account.UserAccount" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into user_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 
-  <select id="selectByUuid" resultType="com.poindre.shua.account.UserAccount">
-    select * from user_account where uuid = #{uuid, jdbcType=VARCHAR} limit 1
-  </select>
+    <select id="selectByUuid" resultType="com.poindre.shua.account.UserAccount">
+        select *
+        from user_account
+        where uuid = #{uuid, jdbcType=VARCHAR}
+        limit 1
+    </select>
 
-  <select id="findAvatar" resultType="String" parameterType="String">
-    select avatar from user_account where uuid = #{uuid, jdbcType=VARCHAR} limit 1
-  </select>
+    <select id="findAvatar" resultType="String" parameterType="String">
+        select avatar
+        from user_account
+        where uuid = #{uuid, jdbcType=VARCHAR}
+        limit 1
+    </select>
+
+    <update id="updateAvatar" parameterType="com.poindre.shua.account.Avatar">
+        update user_account
+        set avatar = #{avatar,jdbcType=VARCHAR}
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
 </mapper>

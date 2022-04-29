@@ -188,4 +188,10 @@
   <select id="selectByCompundKey" parameterType="com.poindre.shua.post.favor.ContentFavor" resultType="Integer">
     select count(*) from content_favor where uuid=#{uuid,jdbcType=VARCHAR} and content_id=#{contentId,jdbcType=BIGINT}
   </select>
+  <select id="getFavorNum" parameterType="Integer" resultType="Integer">
+    select count(*) from content_favor where content_id = #{id, jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPostId" parameterType="Long">
+    delete from content_favor where content_id = #{id,jdbcType=BIGINT}
+  </delete>
 </mapper>

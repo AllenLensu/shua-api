@@ -70,4 +70,8 @@ public interface ContentCommentMapper {
     List<Comment> getComment(Integer id);
 
     int getCommentNum(Integer id);
+
+    List<HistoryComment> getCommentHistory(String uid);
+
+    int deleteByPostId(Long id);
 }

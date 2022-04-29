@@ -5,20 +5,16 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class UserInfo {
-    private String id;
+public class GlobalUserInfo {
+    private String avatar;
 
-    private String name;
+    private Integer followNum;
+
+    private Integer followedNum;
 
     private Short gender;
 
-    private Short age;
-
     private Date birthday;
-
-    private String resident;
-
-    private String household;
 
     private String signature;
 

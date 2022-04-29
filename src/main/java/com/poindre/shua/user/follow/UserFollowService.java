@@ -31,4 +31,12 @@ public interface UserFollowService{
 
     int selectByCompundKey(UserFollow userFollow);
 
+    int getFollowNum(String uuid);
+
+    int getTodayFollowNum(String uuid);
+
+    int getFollowedNum(String uuid);
+
+    int getTodayFollowedNum(String uuid);
+
 }

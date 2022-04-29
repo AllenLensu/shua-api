@@ -41,18 +41,17 @@
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         <!--@mbg.generated-->
-        delete from content_comment
+        delete
+        from content_comment
         where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.post.comment.ContentComment"
             useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into content_comment (content_id, uid, `floor`,
-        ex, `time`, `comment`
-        )
+                                     ex, `time`, `comment`)
         values (#{contentId,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER},
-        #{ex,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{comment,jdbcType=LONGVARCHAR}
-        )
+                #{ex,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, #{comment,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
             parameterType="com.poindre.shua.post.comment.ContentComment" useGeneratedKeys="true">
@@ -128,11 +127,11 @@
         <!--@mbg.generated-->
         update content_comment
         set content_id = #{contentId,jdbcType=BIGINT},
-        uid = #{uid,jdbcType=VARCHAR},
-        `floor` = #{floor,jdbcType=INTEGER},
-        ex = #{ex,jdbcType=BIGINT},
-        `time` = #{time,jdbcType=TIMESTAMP},
-        `comment` = #{comment,jdbcType=LONGVARCHAR}
+            uid        = #{uid,jdbcType=VARCHAR},
+            `floor`    = #{floor,jdbcType=INTEGER},
+            ex         = #{ex,jdbcType=BIGINT},
+            `time`     = #{time,jdbcType=TIMESTAMP},
+            `comment`  = #{comment,jdbcType=LONGVARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateBatch" parameterType="java.util.List">
@@ -230,12 +229,11 @@
     <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into content_comment
-        (content_id, uid, `floor`, ex, `time`, `comment`)
+            (content_id, uid, `floor`, ex, `time`, `comment`)
         values
         <foreach collection="list" item="item" separator=",">
             (#{item.contentId,jdbcType=BIGINT}, #{item.uid,jdbcType=VARCHAR}, #{item.floor,jdbcType=INTEGER},
-            #{item.ex,jdbcType=BIGINT}, #{item.time,jdbcType=TIMESTAMP}, #{item.comment,jdbcType=LONGVARCHAR}
-            )
+             #{item.ex,jdbcType=BIGINT}, #{item.time,jdbcType=TIMESTAMP}, #{item.comment,jdbcType=LONGVARCHAR})
         </foreach>
     </insert>
     <insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
@@ -271,11 +269,11 @@
                 id = #{id,jdbcType=BIGINT},
             </if>
             content_id = #{contentId,jdbcType=BIGINT},
-            uid = #{uid,jdbcType=VARCHAR},
-            `floor` = #{floor,jdbcType=INTEGER},
-            ex = #{ex,jdbcType=BIGINT},
-            `time` = #{time,jdbcType=TIMESTAMP},
-            `comment` = #{comment,jdbcType=LONGVARCHAR},
+            uid        = #{uid,jdbcType=VARCHAR},
+            `floor`    = #{floor,jdbcType=INTEGER},
+            ex         = #{ex,jdbcType=BIGINT},
+            `time`     = #{time,jdbcType=TIMESTAMP},
+            `comment`  = #{comment,jdbcType=LONGVARCHAR},
         </trim>
     </insert>
     <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
@@ -355,27 +353,54 @@
         </trim>
     </insert>
     <select id="getCommentFloor" parameterType="Integer" resultType="Integer">
-        select floor from content_comment where content_id = #{id, jdbcType=INTEGER} order by floor desc limit 1
+        select floor
+        from content_comment
+        where content_id = #{id, jdbcType=INTEGER}
+        order by floor desc
+        limit 1
     </select>
     <select id="getCommentNum" parameterType="Integer" resultType="Integer">
-        select count(*) from content_comment where content_id = #{id, jdbcType=INTEGER}
+        select count(*)
+        from content_comment
+        where content_id = #{id, jdbcType=INTEGER}
     </select>
     <select id="getComment" resultMap="CompoundCommentMap">
-        select
-            comment.id as comment_id,
-            comment.content_id as comment_content_id,
-            comment.uid as comment_uid,
-            comment.floor as comment_floor,
-            comment.time as comment_time,
-            comment.comment as comment_comment,
-                subcomment.id as subcomment_id,
-                subcomment.content_id as subcomment_content_id,
-                subcomment.uid as subcomment_uid,
-                subcomment.floor as subcomment_floor,
-                subcomment.time as subcomment_time,
-                subcomment.comment as subcomment_comment
+        select comment.id            as comment_id,
+               comment.content_id    as comment_content_id,
+               comment.uid           as comment_uid,
+               comment.floor         as comment_floor,
+               comment.time          as comment_time,
+               comment.comment       as comment_comment,
+               subcomment.id         as subcomment_id,
+               subcomment.content_id as subcomment_content_id,
+               subcomment.uid        as subcomment_uid,
+               subcomment.floor      as subcomment_floor,
+               subcomment.time       as subcomment_time,
+               subcomment.comment    as subcomment_comment
         from content_comment comment
-        left join content_comment subcomment on subcomment.ex = comment.id
-        where comment.content_id = #{id,jdbcType=BIGINT} and comment.ex = 0 order by comment.floor
+                 left join content_comment subcomment on subcomment.ex = comment.id
+        where comment.content_id = #{id,jdbcType=BIGINT}
+          and comment.ex = 0
+        order by comment.floor
     </select>
+    <select id="getCommentHistory" parameterType="String" resultType="com.poindre.shua.post.comment.HistoryComment">
+        select content_id           as contentid,
+               content.content      as content,
+               content_comment.uid  as uid,
+               user_info.signature  as signature,
+               content.sendTime     as sendTime,
+               user_account.avatar  as avatar,
+               comment              as comment,
+               content_comment.time as commentTime
+        from content_comment
+                 left join content on content_comment.content_id = content.contentId
+                 left join user on content_comment.uid = user.uid
+                 left join user_info on user.uuid = user_info.id
+                 left join user_account on user.uuid = user_account.uuid
+        where content_comment.uid = #{uid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPostId" parameterType="Long">
+        delete from content_comment where content_id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>

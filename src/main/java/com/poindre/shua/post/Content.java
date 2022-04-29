@@ -16,7 +16,7 @@ public class Content {
 
     private Integer type_ex;
 
-    private Long hot;
+    private Double hot;
 
     private Date sendTime;
 }

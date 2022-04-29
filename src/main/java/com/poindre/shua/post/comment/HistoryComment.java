@@ -1,11 +1,11 @@
-package com.poindre.shua.post;
+package com.poindre.shua.post.comment;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class DetailContent {
+public class HistoryComment {
     private Long contentid;
 
     private String content;
@@ -18,5 +18,7 @@ public class DetailContent {
 
     private String avatar;
 
-    private Double hot;
+    private String comment;
+
+    private Date commentTime;
 }

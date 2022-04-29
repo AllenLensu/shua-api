@@ -33,4 +33,8 @@ public interface ContentCommentService{
 
     int getCommentNum(Integer id);
 
+    List<HistoryComment> getCommentHistory(String uid);
+
+    int deleteByPostId(Long id);
+
 }

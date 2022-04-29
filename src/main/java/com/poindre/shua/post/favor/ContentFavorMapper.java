@@ -68,4 +68,8 @@ public interface ContentFavorMapper {
     int deleteByCompundKey(ContentFavor contentFavor);
 
     int selectByCompundKey(ContentFavor contentFavor);
+
+    int getFavorNum(int id);
+
+    int deleteByPostId(Long id);
 }

@@ -79,4 +79,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         return userAccountMapper.findAvatar(uuid);
     }
 
+    @Override
+    public int updateAvatar(Avatar avatar) {
+        return userAccountMapper.updateAvatar(avatar);
+    }
+
 }

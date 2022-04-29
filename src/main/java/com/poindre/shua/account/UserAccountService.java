@@ -32,4 +32,6 @@ public interface UserAccountService{
 
     String findAvatar(String uuid);
 
+    int updateAvatar(Avatar avatar);
+
 }

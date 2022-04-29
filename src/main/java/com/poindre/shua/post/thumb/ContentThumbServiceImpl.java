@@ -47,4 +47,14 @@ public class ContentThumbServiceImpl implements ContentThumbService{
         return contentThumbMapper.selectByCompundKey(contentThumb);
     }
 
+    @Override
+    public int getThumbNum(int id) {
+        return contentThumbMapper.getThumbNum(id);
+    }
+
+    @Override
+    public int deleteByPostId(Long id) {
+        return contentThumbMapper.deleteByPostId(id);
+    }
+
 }

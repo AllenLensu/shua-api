@@ -1,6 +1,8 @@
 package com.poindre.shua.controller;
 
 import com.poindre.shua.handler.Response;
+import com.poindre.shua.post.ContentService;
+import com.poindre.shua.post.DetailContent;
 import com.poindre.shua.post.comment.ContentCommentService;
 import com.poindre.shua.post.favor.ContentFavor;
 import com.poindre.shua.post.favor.ContentFavorService;
@@ -11,6 +13,7 @@ import com.poindre.shua.user.follow.UserFollow;
 import com.poindre.shua.user.follow.UserFollowService;
 import com.poindre.shua.user.star.UserStar;
 import com.poindre.shua.user.star.UserStarService;
+import com.poindre.shua.util.SocialRecommendUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +26,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("opt")
@@ -35,9 +39,15 @@ public class OptionalController {
     @Resource
     private UserService userService;
     @Resource
+    private ContentService contentService;
+    @Resource
     private ContentFavorService contentFavorService;
     @Resource
     private ContentThumbService contentThumbService;
+    @Resource
+    private SocialRecommendUtils socialRecommendUtils;
+    @Resource
+    private ContentCommentService contentCommentService;
 
     @RequestMapping("/{toFollow}/follow")
     public Response<Object> followUser(
@@ -72,6 +82,7 @@ public class OptionalController {
         var uuid = userService.getUuid(currentUserUsername);
         var post_id = Long.parseLong(toFavor);
         contentFavorService.insert(ContentFavor.builder().contentId(post_id).uuid(uuid).time(new Date()).build());
+        socialRecommendUtils.handler(post_id);
         return Response.of(true, null);
     }
 
@@ -84,6 +95,7 @@ public class OptionalController {
         var uuid = userService.getUuid(currentUserUsername);
         var post_id = Long.parseLong(toUnfavor);
         contentFavorService.deleteByCompundKey(ContentFavor.builder().contentId(post_id).uuid(uuid).time(new Date()).build());
+        socialRecommendUtils.handler(post_id);
         return Response.of(true, null);
     }
 
@@ -96,6 +108,7 @@ public class OptionalController {
         var uuid = userService.getUuid(currentUserUsername);
         var post_id = Long.parseLong(toThumbsup);
         contentThumbService.insert(ContentThumb.builder().contentId(post_id).uuid(uuid).time(new Date()).build());
+        socialRecommendUtils.handler(post_id);
         return Response.of(true, null);
     }
 
@@ -108,6 +121,7 @@ public class OptionalController {
         var uuid = userService.getUuid(currentUserUsername);
         var post_id = Long.parseLong(toThumbsdown);
         contentThumbService.deleteByCompundKey(ContentThumb.builder().contentId(post_id).uuid(uuid).time(new Date()).build());
+        socialRecommendUtils.handler(post_id);
         return Response.of(true, null);
     }
 
@@ -136,5 +150,15 @@ public class OptionalController {
         var uuid = userService.getUuid(currentUserUsername);
         List<UserStar> starList = userStarService.findStaredType(uuid);
         return Response.of(true, starList);
+    }
+
+    @RequestMapping("/{id}/deletePost")
+    public Response<Objects> deletePost(
+            @PathVariable Long id) {
+        contentService.deleteByPostId(id);
+        contentFavorService.deleteByPostId(id);
+        contentThumbService.deleteByPostId(id);
+        contentCommentService.deleteByPostId(id);
+        return Response.of(true, null);
     }
 }

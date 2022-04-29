@@ -9,7 +9,7 @@
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="type_ex" jdbcType="INTEGER" property="type_ex"/>
-        <result column="hot" jdbcType="BIGINT" property="hot"/>
+        <result column="hot" jdbcType="DOUBLE" property="hot"/>
         <result column="sendTime" jdbcType="DATETIMEOFFSET" property="sendTime"/>
     </resultMap>
     <resultMap id="PostContentMap" type="com.poindre.shua.post.DetailContent">
@@ -19,12 +19,39 @@
         <result column="signature" jdbcType="VARCHAR" property="signature"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
     </resultMap>
+    <resultMap id="HistoryCommentMap" type="com.poindre.shua.post.comment.HistoryComment">
+        <id column="contentId" jdbcType="BIGINT" property="contentid"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="signature" jdbcType="VARCHAR" property="signature"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="comment" jdbcType="VARCHAR" property="comment"/>
+    </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
         contentId, uuid, content, type, type_ex, hot, sendTime
     </sql>
 
     <select id="findAllPosts" resultMap="PostContentMap">
+        select contentId, content, u.uid, i.signature, sendTime, avatar, hot
+        from content
+                 join user u on content.uuid = u.uuid
+                 join user_info i on u.uuid = i.id
+                 join user_account a on a.uuid = u.uuid
+        order by hot desc
+    </select>
+
+    <select id="findTypePosts" resultMap="PostContentMap">
+        select contentId, content, u.uid, i.signature, sendTime, avatar, hot
+        from content
+                 join user u on content.uuid = u.uuid
+                 join user_info i on u.uuid = i.id
+                 join user_account a on a.uuid = u.uuid
+        where content.type = #{id, jdbcType=INTEGER}
+        order by hot desc
+    </select>
+
+    <select id="findAllPostsTime" resultMap="PostContentMap">
         select contentId, content, u.uid, i.signature, sendTime, avatar
         from content
                  join user u on content.uuid = u.uuid
@@ -33,28 +60,140 @@
         order by sendTime desc
     </select>
 
-    <select id="findTypePosts" resultMap="PostContentMap">
+    <select id="findTypePostsTime" resultMap="PostContentMap">
         select contentId, content, u.uid, i.signature, sendTime, avatar
         from content
-        join user u on content.uuid = u.uuid
-        join user_info i on u.uuid = i.id
-        join user_account a on a.uuid = u.uuid
+                 join user u on content.uuid = u.uuid
+                 join user_info i on u.uuid = i.id
+                 join user_account a on a.uuid = u.uuid
         where content.type = #{id, jdbcType=INTEGER}
         order by sendTime desc
     </select>
 
     <insert id="insertPost" parameterType="com.poindre.shua.post.Content">
-        insert into content(uuid, content, type, type_ex, sendTime) VALUES(#{uuid,jdbcType=VARCHAR},
-        #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{type_ex,jdbcType=INTEGER},
-        #{sendTime,jdbcType=TIMESTAMP})
+        insert into content(uuid, content, type, type_ex, sendTime)
+        VALUES (#{uuid,jdbcType=VARCHAR},
+                #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{type_ex,jdbcType=INTEGER},
+                #{sendTime,jdbcType=TIMESTAMP})
     </insert>
 
     <select id="findById" resultType="com.poindre.shua.post.DetailContent">
         select contentId, content, u.uid, i.signature, sendTime, avatar
         from content
-        join user u on content.uuid = u.uuid
-        join user_info i on u.uuid = i.id
-        join user_account a on a.uuid = u.uuid
-        where content.contentId = #{id, jdbcType=INTEGER} limit 1
+                 join user u on content.uuid = u.uuid
+                 join user_info i on u.uuid = i.id
+                 join user_account a on a.uuid = u.uuid
+        where content.contentId = #{id, jdbcType=INTEGER}
+        limit 1
     </select>
+
+    <update id="updateHot" parameterType="com.poindre.shua.post.Hot">
+        update content
+        set hot = #{hot,jdbcType=DOUBLE}
+        where contentId = #{contentid,jdbcType=BIGINT}
+    </update>
+
+    <select id="getTime" parameterType="Long" resultType="Date">
+        select sendTime
+        from content
+        where contentId = #{id,jdbcType=BIGINT}
+        limit 1
+    </select>
+
+    <select id="getPopularity" parameterType="Long" resultType="Double">
+        select hot
+        from content
+        where contentId = #{id,jdbcType=BIGINT}
+        limit 1
+    </select>
+
+    <select id="historyComment" resultMap="HistoryCommentMap" parameterType="String">
+        select contentId,
+               content,
+               u.uid,
+               i.signature,
+               sendTime,
+               avatar,
+               comment,
+               cc.time
+        from content
+                 join user u on content.uuid = u.uuid
+                 join user_info i on content.uuid = i.id
+                 join user_account a on a.uuid = content.uuid
+                 join content_comment cc on u.uid = cc.uid
+        where cc.uid = #{uid,jdbcType=VARCHAR}
+        order by cc.time desc
+    </select>
+
+    <select id="historyFavor" resultMap="PostContentMap" parameterType="String">
+        select DISTINCT contentId,
+               content,
+               u.uid,
+               i.signature,
+               sendTime,
+               avatar
+        from content_favor cf
+                 join user u on cf.uuid = u.uuid
+                 join user_info i on cf.uuid = i.id
+                 join user_account a on a.uuid = cf.uuid
+                 join content c on c.contentId = cf.content_id
+        where cf.uuid = #{uuid,jdbcType=VARCHAR}
+        order by cf.time desc
+    </select>
+
+    <select id="historyThumb" resultMap="PostContentMap" parameterType="String">
+        select DISTINCT contentId,
+               content,
+               u.uid,
+               i.signature,
+               sendTime,
+               avatar
+        from content_thumb ct
+                 join user u on ct.uuid = u.uuid
+                 join user_info i on ct.uuid = i.id
+                 join user_account a on a.uuid = ct.uuid
+                 join content c on c.contentId = ct.content_id
+        where ct.uuid = #{uuid,jdbcType=VARCHAR}
+        order by ct.time desc
+    </select>
+
+    <select id="getPostId" parameterType="String" resultType="Long">
+        select contentId
+        from content
+        where uuid = #{id,jdbcType=VARCHAR}
+        order by sendTime desc
+        limit 1
+    </select>
+
+    <select id="getContentNum" parameterType="String" resultType="Integer">
+        select count(*)
+        from content
+        where content.uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getTodayContentNum" parameterType="String" resultType="Integer">
+        select count(*)
+        from content
+        where content.uuid = #{uuid,jdbcType=VARCHAR}
+          and content.sendTime > now() - 86400
+    </select>
+
+    <select id="historyPost" resultMap="PostContentMap" parameterType="String">
+        select contentId,
+        content,
+        u.uid,
+        i.signature,
+        sendTime,
+        avatar
+        from content
+        join user u on content.uuid = u.uuid
+        join user_info i on content.uuid = i.id
+        join user_account a on a.uuid = content.uuid
+        where content.uuid = #{uuid,jdbcType=VARCHAR}
+        order by content.sendTime desc
+    </select>
+
+    <delete id="deleteByPostId" parameterType="Long">
+        delete from content where contentId = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>
