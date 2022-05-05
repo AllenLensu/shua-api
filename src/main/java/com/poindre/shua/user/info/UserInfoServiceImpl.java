@@ -80,4 +80,14 @@ public class UserInfoServiceImpl implements UserInfoService{
         return userInfoMapper.updateProfile(userInfo);
     }
 
+    @Override
+    public List<GlobalUserInfo> findUserInfo(UniqueUserId userId) {
+        return userInfoMapper.findUserInfo(userId);
+    }
+
+    @Override
+    public List<GlobalUserInfo> getUserInfo(String uid) {
+        return userInfoMapper.getUserInfo(uid);
+    }
+
 }

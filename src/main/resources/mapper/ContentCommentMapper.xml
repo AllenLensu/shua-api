@@ -386,7 +386,7 @@
     <select id="getCommentHistory" parameterType="String" resultType="com.poindre.shua.post.comment.HistoryComment">
         select content_id           as contentid,
                content.content      as content,
-               content_comment.uid  as uid,
+               user.uid             as uid,
                user_info.signature  as signature,
                content.sendTime     as sendTime,
                user_account.avatar  as avatar,
@@ -394,13 +394,15 @@
                content_comment.time as commentTime
         from content_comment
                  left join content on content_comment.content_id = content.contentId
-                 left join user on content_comment.uid = user.uid
+                 left join user on content.uuid = user.uuid
                  left join user_info on user.uuid = user_info.id
                  left join user_account on user.uuid = user_account.uuid
         where content_comment.uid = #{uid,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPostId" parameterType="Long">
-        delete from content_comment where content_id = #{id,jdbcType=BIGINT}
+        delete
+        from content_comment
+        where content_id = #{id,jdbcType=BIGINT}
     </delete>
 </mapper>

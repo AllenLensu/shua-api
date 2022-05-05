@@ -97,4 +97,24 @@ public class ContentServiceImpl implements ContentService{
         return contentMapper.deleteByPostId(id);
     }
 
+    @Override
+    public List<Content> getManagePost() {
+        return contentMapper.getManagePost();
+    }
+
+    @Override
+    public int banPost(Long id) {
+        return contentMapper.banPost(id);
+    }
+
+    @Override
+    public int unbanPost(Long id) {
+        return contentMapper.unbanPost(id);
+    }
+
+    @Override
+    public Content forwardGetPost(Long id) {
+        return contentMapper.forwardGetPost(id);
+    }
+
 }

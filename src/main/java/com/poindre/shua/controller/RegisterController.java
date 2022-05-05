@@ -15,7 +15,9 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -89,6 +91,14 @@ public class RegisterController {
         userRoleService.insertSelective(userRole);
 
         return Response.of(true, formData.getFirstname());
+    }
+
+    @RequestMapping("/verifyUID/{uid}")
+    private Response<Boolean> verifyUID(
+            @PathVariable String uid
+    ) {
+        int num = userService.uidUniqueVerify(uid);
+        return Response.of(true, num == 0);
     }
 
     protected String uniqueUuid() {

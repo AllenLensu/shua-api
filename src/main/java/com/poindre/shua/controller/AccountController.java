@@ -1,19 +1,21 @@
 package com.poindre.shua.controller;
 
+import com.poindre.shua.account.Password;
 import com.poindre.shua.account.UserAccountService;
+import com.poindre.shua.account.UserPassword;
 import com.poindre.shua.account.info.UserAccountInfo;
 import com.poindre.shua.account.info.UserAccountInfoService;
 import com.poindre.shua.handler.Response;
-import com.poindre.shua.user.User;
+import com.poindre.shua.user.UserService;
 import com.poindre.shua.user.info.UserInfo;
 import com.poindre.shua.user.info.UserInfoService;
-import com.poindre.shua.user.UserService;
 import com.poindre.shua.user.role.UserRoleService;
-import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,7 +61,7 @@ public class AccountController {
     }
 
     @RequestMapping("changeProfile")
-    public Response<UserInfo> changeProfile(Profile profile,@AuthenticationPrincipal UserDetails userDetails) {
+    public Response<UserInfo> changeProfile(Profile profile, @AuthenticationPrincipal UserDetails userDetails) {
         var username = userDetails.getUsername();
         UserInfo userInfo = new UserInfo();
         userInfo.setId(userService.getUuid(username));
@@ -73,6 +75,22 @@ public class AccountController {
         userInfo.setIntroduction(profile.getIntroduction());
         userInfoService.updateProfile(userInfo);
         return Response.of(true, null);
+    }
+
+    @RequestMapping("changePass")
+    public Response<Object> changePass(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Password password
+    ) {
+        var username = userDetails.getUsername();
+        var uuid = userService.getUuid(username);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(password.getBefore(),userAccountService.getPass(uuid))) {
+            return Response.of(false, null);
+        } else {
+            userAccountService.updatePass(UserPassword.builder().password(BCrypt.hashpw(password.getNow(), BCrypt.gensalt())).uuid(uuid).build());
+            return Response.of(true, null);
+        }
     }
 
     @Data

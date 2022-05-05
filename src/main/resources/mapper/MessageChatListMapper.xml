@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.message.list.MessageChatListMapper">
+    <resultMap id="BaseResultMap" type="com.poindre.shua.message.list.MessageChatList">
+        <!--@mbg.generated-->
+        <!--@Table message_chat_list-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="chat_uuid" jdbcType="VARCHAR" property="chatUuid"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, uuid, chat_uuid, `time`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from message_chat_list
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete
+        from message_chat_list
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.poindre.shua.message.list.MessageChatList"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message_chat_list (uuid, chat_uuid, `time`)
+        values (#{uuid,jdbcType=VARCHAR}, #{chatUuid,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.poindre.shua.message.list.MessageChatList" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message_chat_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="chatUuid != null">
+                chat_uuid,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="chatUuid != null">
+                #{chatUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.message.list.MessageChatList">
+        <!--@mbg.generated-->
+        update message_chat_list
+        <set>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="chatUuid != null">
+                chat_uuid = #{chatUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.message.list.MessageChatList">
+        <!--@mbg.generated-->
+        update message_chat_list
+        set uuid      = #{uuid,jdbcType=VARCHAR},
+            chat_uuid = #{chatUuid,jdbcType=VARCHAR},
+            `time`    = #{time,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update message_chat_list
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=INTEGER} then #{item.uuid,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="chat_uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=INTEGER} then #{item.chatUuid,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=INTEGER} then #{item.time,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update message_chat_list
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.uuid != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.uuid,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="chat_uuid = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.chatUuid != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.chatUuid,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.time != null">
+                        when id = #{item.id,jdbcType=INTEGER} then #{item.time,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message_chat_list
+            (uuid, chat_uuid, `time`)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.uuid,jdbcType=VARCHAR}, #{item.chatUuid,jdbcType=VARCHAR}, #{item.time,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id"
+            parameterType="com.poindre.shua.message.list.MessageChatList" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message_chat_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            uuid,
+            chat_uuid,
+            `time`,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            #{uuid,jdbcType=VARCHAR},
+            #{chatUuid,jdbcType=VARCHAR},
+            #{time,jdbcType=TIMESTAMP},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            uuid      = #{uuid,jdbcType=VARCHAR},
+            chat_uuid = #{chatUuid,jdbcType=VARCHAR},
+            `time`    = #{time,jdbcType=TIMESTAMP},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.poindre.shua.message.list.MessageChatList" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message_chat_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="chatUuid != null">
+                chat_uuid,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="chatUuid != null">
+                #{chatUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="chatUuid != null">
+                chat_uuid = #{chatUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="dumpFilterHelper" parameterType="String" resultType="String">
+        select uid
+        from message_chat_list
+                 join user u on message_chat_list.chat_uuid = u.uuid
+        where message_chat_list.uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getChatList" parameterType="String" resultType="com.poindre.shua.message.list.UserChatList">
+        select uid       as uid,
+               chat_uuid as uuid,
+               avatar    as avatar,
+               time      as time
+        from message_chat_list mcl
+                 join user u on mcl.chat_uuid = u.uuid
+                 join user_account ua on u.uuid = ua.uuid
+        where mcl.uuid = #{uuid,jdbcType=VARCHAR}
+        order by time desc
+    </select>
+
+    <insert id="addChatList" parameterType="com.poindre.shua.message.list.AddChatList">
+        insert into message_chat_list(uuid, chat_uuid, time) VALUE (#{uuid,jdbcType=VARCHAR},
+                                                                    #{chat_uuid,jdbcType=VARCHAR},
+                                                                    #{time,jdbcType=DATE})
+    </insert>
+
+    <select id="verifyChatExist" parameterType="com.poindre.shua.message.BothSide" resultType="Integer">
+        select count(*)
+        from message_chat_list
+        where uuid = #{chat_uuid,jdbcType=VARCHAR}
+          and chat_uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateTime" parameterType="com.poindre.shua.message.BothSide">
+        update message_chat_list
+        set time = now()
+        where chat_uuid = #{uuid,jdbcType=VARCHAR}
+          and uuid = #{chat_uuid,jdbcType=VARCHAR}
+    </update>
+</mapper>

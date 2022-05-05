@@ -189,6 +189,29 @@ public class PostController {
         return Response.of(true, userAccountService.findAvatar(userService.getUuid(uid)));
     }
 
+    @RequestMapping("/{id}/{uid}/forward")
+    @PreAuthorize("isAuthenticated()")
+    public Response<Object> forwardPost(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable long id,
+            @PathVariable String uid
+    ) {
+        var currentUserUsername = currentUser.getUsername();
+        var uuid = userService.getUuid(currentUserUsername);
+        Content content = contentService.forwardGetPost(id);
+        Content forward = new Content();
+        forward.setUuid(uuid);
+        String post_content = "[" + uid + "](http://localhost:18000/#/detail/" + id + "): " + content.getContent();
+        forward.setContent(post_content);
+        forward.setType(content.getType());
+        forward.setType_ex(content.getType_ex());
+        forward.setSendTime(new Date());
+        contentService.insertPost(forward);
+        var post_id = contentService.getPostId(uuid);
+        socialRecommendUtils.handler(post_id);
+        return Response.of(true, null);
+    }
+
     @Data
     static class RequestCreateContentForm {
         private String post;

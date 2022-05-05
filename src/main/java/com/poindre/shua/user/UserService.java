@@ -1,6 +1,9 @@
 package com.poindre.shua.user;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.poindre.shua.message.list.ChatList;
 import com.poindre.shua.user.User;
 public interface UserService{
 
@@ -32,4 +35,8 @@ public interface UserService{
     int idUuidUnique(String uuid);
 
     List<User> selectByUuid(String account);
+
+    int uidUniqueVerify(String uid);
+
+    ArrayList<ChatList> loadChatlist();
 }

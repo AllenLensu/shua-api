@@ -248,4 +248,16 @@
         set avatar = #{avatar,jdbcType=VARCHAR}
         where uuid = #{uuid,jdbcType=VARCHAR}
     </update>
+
+    <select id="getPass" parameterType="String" resultType="String">
+        select password
+        from user_account
+        where uuid = #{uuid,jdbcType=VARCHAR};
+    </select>
+
+    <update id="updatePass" parameterType="com.poindre.shua.account.UserPassword">
+        update user_account
+        set password=#{password,jdbcType=VARCHAR}
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
 </mapper>

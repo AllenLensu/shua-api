@@ -84,4 +84,14 @@ public class UserAccountServiceImpl implements UserAccountService {
         return userAccountMapper.updateAvatar(avatar);
     }
 
+    @Override
+    public String getPass(String uuid) {
+        return userAccountMapper.getPass(uuid);
+    }
+
+    @Override
+    public int updatePass(UserPassword password) {
+        return userAccountMapper.updatePass(password);
+    }
+
 }

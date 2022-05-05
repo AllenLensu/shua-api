@@ -214,4 +214,24 @@
         where user_follow.followed_uuid = #{uuid,jdbcType=VARCHAR}
         and user_follow.time > now() - 86400
     </select>
+
+    <select id="getFollow" parameterType="String" resultType="com.poindre.shua.user.follow.Followwed">
+        select
+            uid,
+            avatar
+        from user_follow uf
+        join user u on uf.followed_uuid = u.uuid
+        join user_account ua on uf.followed_uuid = ua.uuid
+        where uf.uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getFollowed" parameterType="String" resultType="com.poindre.shua.user.follow.Followwed">
+        select
+        uid,
+        avatar
+        from user_follow uf
+        join user u on uf.uuid = u.uuid
+        join user_account ua on uf.uuid = ua.uuid
+        where uf.followed_uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
 </mapper>

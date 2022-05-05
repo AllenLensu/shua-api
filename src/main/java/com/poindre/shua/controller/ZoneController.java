@@ -139,7 +139,23 @@ public class ZoneController {
         return Response.of(true, null);
     }
 
-    @Data
+    @RequestMapping("getFollow")
+    @PreAuthorize("isAuthenticated()")
+    public Response<Object> getFollow(@AuthenticationPrincipal UserDetails userDetails) {
+        var username = userDetails.getUsername();
+        var uuid = userService.getUuid(username);
+        return Response.of(true, userFollowService.getFollow(uuid));
+    }
+
+    @RequestMapping("getFollowed")
+    @PreAuthorize("isAuthenticated()")
+    public Response<Object> getFollowed(@AuthenticationPrincipal UserDetails userDetails) {
+        var username = userDetails.getUsername();
+        var uuid = userService.getUuid(username);
+        return Response.of(true, userFollowService.getFollowed(uuid));
+    }
+
+        @Data
     static class AvatarData {
         protected MultipartFile file;
         protected String uid;

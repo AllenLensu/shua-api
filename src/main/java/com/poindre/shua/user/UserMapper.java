@@ -1,6 +1,9 @@
 package com.poindre.shua.user;
 
+import com.poindre.shua.message.list.ChatList;
 import com.poindre.shua.user.User;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -72,4 +75,8 @@ public interface UserMapper {
     int idUuidUnique(String uuid);
 
     List<User> selectByUuid(String account);
+
+    int uidUniqueVerify(String uid);
+
+    ArrayList<ChatList> loadChatlist();
 }

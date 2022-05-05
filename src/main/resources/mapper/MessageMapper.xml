@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poindre.shua.message.MessageMapper">
+    <resultMap id="BaseResultMap" type="com.poindre.shua.message.Message">
+        <!--@mbg.generated-->
+        <!--@Table message-->
+        <id column="mesid" jdbcType="INTEGER" property="mesid"/>
+        <result column="message" jdbcType="LONGVARCHAR" property="message"/>
+        <result column="send" jdbcType="VARCHAR" property="send"/>
+        <result column="receive" jdbcType="VARCHAR" property="receive"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        mesid, message, send, receive, `time`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from message
+        where mesid = #{mesid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete
+        from message
+        where mesid = #{mesid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="mesid" keyProperty="mesid" parameterType="com.poindre.shua.message.Message"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message (message, send, receive,
+                             `time`)
+        values (#{message,jdbcType=LONGVARCHAR}, #{send,jdbcType=VARCHAR}, #{receive,jdbcType=VARCHAR},
+                #{time,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="mesid" keyProperty="mesid" parameterType="com.poindre.shua.message.Message"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="message != null">
+                message,
+            </if>
+            <if test="send != null">
+                send,
+            </if>
+            <if test="receive != null">
+                receive,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="message != null">
+                #{message,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="send != null">
+                #{send,jdbcType=VARCHAR},
+            </if>
+            <if test="receive != null">
+                #{receive,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.poindre.shua.message.Message">
+        <!--@mbg.generated-->
+        update message
+        <set>
+            <if test="message != null">
+                message = #{message,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="send != null">
+                send = #{send,jdbcType=VARCHAR},
+            </if>
+            <if test="receive != null">
+                receive = #{receive,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where mesid = #{mesid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.poindre.shua.message.Message">
+        <!--@mbg.generated-->
+        update message
+        set message = #{message,jdbcType=LONGVARCHAR},
+            send    = #{send,jdbcType=VARCHAR},
+            receive = #{receive,jdbcType=VARCHAR},
+            `time`  = #{time,jdbcType=TIMESTAMP}
+        where mesid = #{mesid,jdbcType=INTEGER}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update message
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="message = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when mesid = #{item.mesid,jdbcType=INTEGER} then #{item.message,jdbcType=LONGVARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="send = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when mesid = #{item.mesid,jdbcType=INTEGER} then #{item.send,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="receive = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when mesid = #{item.mesid,jdbcType=INTEGER} then #{item.receive,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when mesid = #{item.mesid,jdbcType=INTEGER} then #{item.time,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+        </trim>
+        where mesid in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.mesid,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update message
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="message = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.message != null">
+                        when mesid = #{item.mesid,jdbcType=INTEGER} then #{item.message,jdbcType=LONGVARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="send = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.send != null">
+                        when mesid = #{item.mesid,jdbcType=INTEGER} then #{item.send,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="receive = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.receive != null">
+                        when mesid = #{item.mesid,jdbcType=INTEGER} then #{item.receive,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="`time` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.time != null">
+                        when mesid = #{item.mesid,jdbcType=INTEGER} then #{item.time,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where mesid in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.mesid,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="mesid" keyProperty="mesid" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message
+            (message, send, receive, `time`)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.message,jdbcType=LONGVARCHAR}, #{item.send,jdbcType=VARCHAR}, #{item.receive,jdbcType=VARCHAR},
+             #{item.time,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="mesid" keyProperty="mesid" parameterType="com.poindre.shua.message.Message"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mesid != null">
+                mesid,
+            </if>
+            message,
+            send,
+            receive,
+            `time`,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mesid != null">
+                #{mesid,jdbcType=INTEGER},
+            </if>
+            #{message,jdbcType=LONGVARCHAR},
+            #{send,jdbcType=VARCHAR},
+            #{receive,jdbcType=VARCHAR},
+            #{time,jdbcType=TIMESTAMP},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="mesid != null">
+                mesid = #{mesid,jdbcType=INTEGER},
+            </if>
+            message = #{message,jdbcType=LONGVARCHAR},
+            send    = #{send,jdbcType=VARCHAR},
+            receive = #{receive,jdbcType=VARCHAR},
+            `time`  = #{time,jdbcType=TIMESTAMP},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="mesid" keyProperty="mesid"
+            parameterType="com.poindre.shua.message.Message" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mesid != null">
+                mesid,
+            </if>
+            <if test="message != null">
+                message,
+            </if>
+            <if test="send != null">
+                send,
+            </if>
+            <if test="receive != null">
+                receive,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mesid != null">
+                #{mesid,jdbcType=INTEGER},
+            </if>
+            <if test="message != null">
+                #{message,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="send != null">
+                #{send,jdbcType=VARCHAR},
+            </if>
+            <if test="receive != null">
+                #{receive,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="mesid != null">
+                mesid = #{mesid,jdbcType=INTEGER},
+            </if>
+            <if test="message != null">
+                message = #{message,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="send != null">
+                send = #{send,jdbcType=VARCHAR},
+            </if>
+            <if test="receive != null">
+                receive = #{receive,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                `time` = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <insert id="addMessage" parameterType="com.poindre.shua.message.Message">
+        insert into message(message, send, receive, time) VALUE (#{message,jdbcType=LONGVARCHAR},
+                                                                 #{send, jdbcType=VARCHAR}, #{receive,jdbcType=VARCHAR},
+                                                                 #{time,jdbcType=DATE})
+    </insert>
+    <select id="findMessage" parameterType="com.poindre.shua.message.BothSide"
+            resultType="com.poindre.shua.message.Message">
+        select *
+        from message
+        where (send = #{uuid,jdbcType=VARCHAR} and receive = #{chat_uuid,jdbcType=VARCHAR})
+           or (send = #{chat_uuid,jdbcType=VARCHAR} and receive = #{uuid,jdbcType=VARCHAR})
+        order by time asc 
+    </select>
+</mapper>

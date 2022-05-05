@@ -19,4 +19,6 @@ public class Content {
     private Double hot;
 
     private Date sendTime;
+
+    private Boolean isBanned;
 }

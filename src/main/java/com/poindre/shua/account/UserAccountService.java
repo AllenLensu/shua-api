@@ -34,4 +34,8 @@ public interface UserAccountService{
 
     int updateAvatar(Avatar avatar);
 
+    String getPass(String uuid);
+
+    int updatePass(UserPassword password);
+
 }

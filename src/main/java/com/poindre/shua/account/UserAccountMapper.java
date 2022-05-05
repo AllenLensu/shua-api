@@ -70,4 +70,8 @@ public interface UserAccountMapper {
     String findAvatar(String uuid);
 
     int updateAvatar(Avatar avatar);
+
+    String getPass(String uuid);
+
+    int updatePass(UserPassword password);
 }

@@ -66,4 +66,10 @@ public interface UserAccountInfoMapper {
     int batchInsert(@Param("list") List<UserAccountInfo> list);
 
     UserAccountInfo selectByUuid(String uuid);
+
+    int banUser(String uuid);
+
+    int unbanUser(String uuid);
+
+    int deleteUser(String uuid);
 }

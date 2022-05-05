@@ -1,8 +1,11 @@
 package com.poindre.shua.user;
 
+import com.poindre.shua.message.list.ChatList;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.poindre.shua.user.UserMapper;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.poindre.shua.user.User;
 import com.poindre.shua.user.UserService;
@@ -80,6 +83,16 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> selectByUuid(String account) {
         return userMapper.selectByUuid(account);
+    }
+
+    @Override
+    public int uidUniqueVerify(String uid) {
+        return userMapper.uidUniqueVerify(uid);
+    }
+
+    @Override
+    public ArrayList<ChatList> loadChatlist() {
+        return userMapper.loadChatlist();
     }
 
 }

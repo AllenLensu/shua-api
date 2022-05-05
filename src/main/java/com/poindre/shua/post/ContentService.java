@@ -40,4 +40,12 @@ public interface ContentService{
     List<DetailContent> historyPost(String uuid);
 
     int deleteByPostId(Long id);
+
+    List<Content> getManagePost();
+
+    int banPost(Long id);
+
+    int unbanPost(Long id);
+
+    Content forwardGetPost(Long id);
 }

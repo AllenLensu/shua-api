@@ -70,4 +70,19 @@ public class UserAccountInfoServiceImpl implements UserAccountInfoService{
         return userAccountInfoMapper.selectByUuid(uuid);
     }
 
+    @Override
+    public int banUser(String uuid) {
+        return userAccountInfoMapper.banUser(uuid);
+    }
+
+    @Override
+    public int unbanUser(String uuid) {
+        return userAccountInfoMapper.unbanUser(uuid);
+    }
+
+    @Override
+    public int deleteUser(String uuid) {
+        return userAccountInfoMapper.deleteUser(uuid);
+    }
+
 }

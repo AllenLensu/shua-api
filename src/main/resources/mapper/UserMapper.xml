@@ -209,12 +209,26 @@
     </select>
 
     <select id="idUuidUnique" resultType="java.lang.Integer">
-        select count(*) from intro.user where uuid = #{uuid, jdbcType=VARCHAR}
+        select count(*)
+        from intro.user
+        where uuid = #{uuid, jdbcType=VARCHAR}
     </select>
 
     <select id="selectByUuid" resultType="com.poindre.shua.user.User">
         select *
         from user
         where uuid = #{account,jdbcType=VARCHAR}
+    </select>
+
+    <select id="uidUniqueVerify" resultType="Integer" parameterType="String">
+        select count(*)
+        from user
+        where uid = #{uid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="loadChatlist" resultType="com.poindre.shua.message.list.ChatList">
+        select uid  as value,
+               uuid as link
+        from user
     </select>
 </mapper>

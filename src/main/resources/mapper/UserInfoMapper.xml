@@ -431,4 +431,36 @@
             introduction=#{introduction,jdbcType=VARCHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="findUserInfo" parameterType="com.poindre.shua.user.info.UniqueUserId"
+            resultType="com.poindre.shua.user.info.GlobalUserInfo">
+        select avatar                                                               as avatar,
+               (select count(*) from user_follow uf where uf.uuid = ui.id)          as followNum,
+               (select count(*) from user_follow uf where uf.followed_uuid = ui.id) as followedNum,
+               gender                                                               as gender,
+               birthday                                                             as birthday,
+               signature                                                            as signature,
+               introduction                                                         as introduction
+        from user_info ui
+                 left join content on content.uuid = ui.id
+                 left join user on user.uuid = ui.id
+                 left join user_account ua on ua.uuid = ui.id
+        where content.contentId = #{postId,jdbcType=BIGINT}
+          and user.uid = #{uid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getUserInfo" parameterType="String"
+            resultType="com.poindre.shua.user.info.GlobalUserInfo">
+        select avatar                                                               as avatar,
+        (select count(*) from user_follow uf where uf.uuid = ui.id)          as followNum,
+        (select count(*) from user_follow uf where uf.followed_uuid = ui.id) as followedNum,
+        gender                                                               as gender,
+        birthday                                                             as birthday,
+        signature                                                            as signature,
+        introduction                                                         as introduction
+        from user_info ui
+        left join user on user.uuid = ui.id
+        left join user_account ua on ua.uuid = ui.id
+        where user.uid = #{uid,jdbcType=VARCHAR}
+    </select>
 </mapper>

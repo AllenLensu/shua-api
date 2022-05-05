@@ -36,4 +36,6 @@ public class UserAccountInfo {
     private String banreason;
 
     private Date bandeadline;
+
+    private Boolean isDelete;
 }

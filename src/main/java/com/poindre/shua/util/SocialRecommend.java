@@ -52,7 +52,7 @@ public class SocialRecommend {
      * @return 加权后的推荐指数
      */
     private double weighted(long collectNum, long likeNum, long commentNum) {
-        return likeNum * 0.8 + collectNum * 2.4 + commentNum * 3.6;
+        return likeNum * 8 + collectNum * 24 + commentNum * 36;
     }
 
     public Date getTime() {

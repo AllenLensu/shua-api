@@ -76,4 +76,8 @@ public interface UserFollowMapper {
     int getFollowedNum(String uuid);
 
     int getTodayFollowedNum(String uuid);
+
+    List<Followwed> getFollow(String uuid);
+
+    List<Followwed> getFollowed(String uuid);
 }

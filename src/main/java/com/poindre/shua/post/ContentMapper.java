@@ -42,4 +42,12 @@ public interface ContentMapper {
     List<DetailContent> historyPost(String uuid);
 
     int deleteByPostId(Long id);
+
+    int banPost(Long id);
+
+    int unbanPost(Long id);
+
+    List<Content> getManagePost();
+
+    Content forwardGetPost(Long id);
 }

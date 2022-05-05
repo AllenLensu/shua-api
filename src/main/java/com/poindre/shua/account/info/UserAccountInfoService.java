@@ -28,4 +28,10 @@ public interface UserAccountInfoService{
     int batchInsert(List<UserAccountInfo> list);
 
     UserAccountInfo selectByUuid(String uuid);
+
+    int banUser(String uuid);
+
+    int unbanUser(String uuid);
+
+    int deleteUser(String uuid);
 }

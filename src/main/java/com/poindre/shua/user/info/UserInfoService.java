@@ -30,4 +30,8 @@ public interface UserInfoService{
     List<UserInfo> findAllUser();
 
     int updateProfile(UserInfo userInfo);
+
+    List<GlobalUserInfo> findUserInfo(UniqueUserId userId);
+
+    List<GlobalUserInfo> getUserInfo(String uid);
 }

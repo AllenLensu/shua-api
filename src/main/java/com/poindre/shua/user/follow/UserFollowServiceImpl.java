@@ -97,4 +97,14 @@ public class UserFollowServiceImpl implements UserFollowService{
         return userFollowMapper.getTodayFollowedNum(uuid);
     }
 
+    @Override
+    public List<Followwed> getFollow(String uuid) {
+        return userFollowMapper.getFollow(uuid);
+    }
+
+    @Override
+    public List<Followwed> getFollowed(String uuid) {
+        return userFollowMapper.getFollowed(uuid);
+    }
+
 }
