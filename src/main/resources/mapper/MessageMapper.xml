@@ -269,7 +269,7 @@
     <insert id="addMessage" parameterType="com.poindre.shua.message.Message">
         insert into message(message, send, receive, time) VALUE (#{message,jdbcType=LONGVARCHAR},
                                                                  #{send, jdbcType=VARCHAR}, #{receive,jdbcType=VARCHAR},
-                                                                 #{time,jdbcType=DATE})
+                                                                 #{time,jdbcType=TIMESTAMP})
     </insert>
     <select id="findMessage" parameterType="com.poindre.shua.message.BothSide"
             resultType="com.poindre.shua.message.Message">

@@ -251,7 +251,7 @@
     <insert id="addChatList" parameterType="com.poindre.shua.message.list.AddChatList">
         insert into message_chat_list(uuid, chat_uuid, time) VALUE (#{uuid,jdbcType=VARCHAR},
                                                                     #{chat_uuid,jdbcType=VARCHAR},
-                                                                    #{time,jdbcType=DATE})
+                                                                    #{time,jdbcType=TIMESTAMP})
     </insert>
 
     <select id="verifyChatExist" parameterType="com.poindre.shua.message.BothSide" resultType="Integer">
